@@ -7,6 +7,11 @@
   min-height: 100vh;
 }
 
+.home {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -264,7 +269,7 @@
 
   .logo,
   .thirteen img {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+    filter: drop-shadow(0 0 0.3rem #ffffff70);
   }
 }
 
