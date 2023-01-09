@@ -1,0 +1,56 @@
+.header {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  margin: auto 0;
+  font-size: 2.5rem;
+  font-weight: 300;
+  font-family: var(--font-mono);
+  display: flex;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.link {
+  font-size: 1.5rem;
+  font-weight: 700;
+  transition: 0.05s linear opacity, 0.05s linear transform;
+}
+
+.link:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+.account {
+  transition: 0.05s linear opacity, 0.05s linear transform;
+}
+
+.account:hover {
+  cursor: pointer;
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

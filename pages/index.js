@@ -17,11 +17,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <div className={styles.home}>
-            <a
-              href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <a href='/' target='_blank' rel='noopener noreferrer'>
               <Image
                 src='/cookbook.png'
                 alt='Cookbook Logo'
@@ -33,10 +29,6 @@ export default function Home() {
               COOKBOOK
             </a>
           </div>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
         </div>
 
         <div className={styles.center}>
