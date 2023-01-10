@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
-import './globals.css';
-import Header from './header';
-import Search from '../components/Search/search';
+import Header from '../components/Header/Header';
+import Search from '../components/Search/Search';
 
 export default function RootLayout({ children }) {
   return (

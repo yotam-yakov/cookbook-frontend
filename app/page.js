@@ -1,9 +1,9 @@
-import styles from './Header.module.css';
+import './globals.css';
 
 export default function HomePage() {
   return (
     <div>
-      <h1 className={styles.home}>Home Page</h1>
+      <h1>Home Page</h1>
       <p>content</p>
     </div>
   );
