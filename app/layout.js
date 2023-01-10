@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-head-element */
-import Image from 'next/image';
-import Link from 'next/link';
 import './globals.css';
-import styles from './Layout.module.css';
+import Header from './header';
+import Search from '../components/Search/search';
 
 export default function RootLayout({ children }) {
   return (
@@ -14,60 +13,8 @@ export default function RootLayout({ children }) {
         <link rel='icon' href='/cookbook.ico' />
       </head>
       <body>
-        <div className={styles.header}>
-          <a
-            className={styles.logo}
-            href='/'
-            target='_blank'
-            rel='noopener noreferrer'
-          >
-            <Image
-              src='/cookbook.png'
-              alt='Cookbook Logo'
-              width={56}
-              height={56}
-              priority
-            />
-            COOKBOOK
-          </a>
-          <div className={styles.navbar}>
-            <Link
-              href='https://google.com/'
-              target='__blank'
-              className={styles.link}
-            >
-              Link 1
-            </Link>
-            <Link
-              href='https://google.com/'
-              target='__blank'
-              className={styles.link}
-            >
-              Link 2
-            </Link>
-            <Link
-              href='https://google.com/'
-              target='__blank'
-              className={styles.link}
-            >
-              Link 3
-            </Link>
-            <Image
-              src='/logged-out.svg'
-              alt='logged out icon'
-              width={40}
-              height={40}
-              className={styles.account}
-            />
-            <Image
-              src='/logged-in.svg'
-              alt='logged in icon'
-              width={40}
-              height={40}
-              className={styles.account}
-            />
-          </div>
-        </div>
+        <Header />
+        <Search />
         {children}
       </body>
     </html>
