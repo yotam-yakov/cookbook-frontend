@@ -1,4 +1,86 @@
 .container {
   background-color: white;
-  border: 1px solid red;
+  max-width: 40rem;
+  margin: 1rem auto;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+  max-width: 30rem;
+  margin: 0;
+  padding: 1rem;
+  border: none;
+  font-size: 1.75rem;
+  font-family: var(--font-mono);
+  font-weight: 300;
+}
+
+.input:focus {
+  outline: none;
+  background-color: #eee;
+}
+
+.button {
+  padding: 1rem;
+  background-color: transparent;
+  width: fit-content;
+  transition: 100ms linear background-color;
+}
+
+.button:hover {
+  background-color: #eee;
+}
+
+.button:active {
+  background-color: #ccc;
+}
+
+.filter {
+  width: 100%;
+  /* height: fit-content; */
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  transition: 250ms linear height;
+}
+
+.filterOpen {
+  height: fit-content;
+  padding: 1rem 0;
+  border-top: 1px solid black;
+}
+
+.label {
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin: 0 1rem;
+}
+
+.checkbox {
+  height: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .input {
+    max-width: none;
+    font-size: 1.5rem;
+  }
+
+  .button {
+    padding: 0.5rem 1rem;
+  }
 }

@@ -24,21 +24,21 @@ export default function Header() {
         <Link
           href='https://google.com/'
           target='__blank'
-          className={styles.link}
+          className={`${styles.link} ${styles.click}`}
         >
           Link 1
         </Link>
         <Link
           href='https://google.com/'
           target='__blank'
-          className={styles.link}
+          className={`${styles.link} ${styles.click}`}
         >
           Link 2
         </Link>
         <Link
           href='https://google.com/'
           target='__blank'
-          className={styles.link}
+          className={`${styles.link} ${styles.click}`}
         >
           Link 3
         </Link>
@@ -47,14 +47,14 @@ export default function Header() {
           alt='logged out icon'
           width={40}
           height={40}
-          className={styles.account}
+          className={`${styles.account} ${styles.click}`}
         />
         <Image
           src='/logged-in.svg'
           alt='logged in icon'
           width={40}
           height={40}
-          className={styles.account}
+          className={`${styles.account} ${styles.click}`}
         />
       </div>
     </div>
