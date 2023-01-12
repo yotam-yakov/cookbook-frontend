@@ -10,7 +10,7 @@ export default function Search() {
           id='search'
           name='search'
           placeholder='I am hungry...'
-          className={styles.input}
+          className={styles.query}
         />
         <button type='button' className={styles.button}>
           <Image src='/filter.svg' alt='Filter icon' width={28} height={28} />
@@ -29,7 +29,14 @@ export default function Search() {
             />
             Max Time to make
           </label>
-          <input type='range' id='time' min='5' max='240' step='5' />
+          <input
+            type='number'
+            id='time'
+            min='5'
+            max='240'
+            placeholder='Minutes'
+            className={styles.input}
+          />
           <label className={styles.label}>
             <Image
               src='/dairy.svg'
@@ -40,7 +47,7 @@ export default function Search() {
             />
             Dairy Free
           </label>
-          <input type='checkbox' className={styles.checkbox} id='dairy' />
+          <input type='checkbox' className={styles.input} id='dairy' />
           <label className={styles.label}>
             <Image
               src='/gluten.svg'
@@ -51,7 +58,7 @@ export default function Search() {
             />
             Gluten Free
           </label>
-          <input type='checkbox' className={styles.checkbox} id='gluten' />
+          <input type='checkbox' className={styles.input} id='gluten' />
           <label className={styles.label}>
             <Image
               src='/vegan.svg'
@@ -62,7 +69,7 @@ export default function Search() {
             />
             Vegan
           </label>
-          <input type='checkbox' className={styles.checkbox} id='vegan' />
+          <input type='checkbox' className={styles.input} id='vegan' />
           <label className={styles.label}>
             <Image
               src='/vegetarian.svg'
@@ -73,7 +80,7 @@ export default function Search() {
             />
             Vegetarian
           </label>
-          <input type='checkbox' className={styles.checkbox} id='vegetarian' />
+          <input type='checkbox' className={styles.input} id='vegetarian' />
         </div>
       </form>
     </div>
