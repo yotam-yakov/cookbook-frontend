@@ -1,3 +1,85 @@
 .container {
+  background-color: white;
+  width: 288px;
+  height: 388px;
+  margin: 1.25rem;
+  padding: 0.75rem;
   border-radius: 1.5rem;
+  font-family: var(--font-mono);
+  display: grid;
+  grid-template-columns: repeat(4, 2.5rem) auto;
+  grid-template-rows: 4rem auto 3rem 3.75rem;
+  row-gap: 1rem;
+}
+
+.title {
+  width: 264px;
+  max-height: 4rem;
+  margin: 0;
+  grid-column: 1 / -1;
+  line-height: 2rem;
+  overflow: hidden;
+  word-spacing: -0.25rem;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.image {
+  margin: 0;
+  grid-column: 1 / -1;
+}
+
+.time {
+  margin: auto 0;
+  grid-column: 1 / 4;
+  grid-row: 3 / 4;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.clock {
+  margin-right: 0.5rem;
+}
+
+.source {
+  margin: auto;
+  margin-right: 0;
+  grid-column: 4 / -1;
+  grid-row: 3 / 4;
+  font-size: 1.25rem;
+  text-align: right;
+}
+
+.diet {
+  margin: auto;
+  margin-left: 0;
+  opacity: 0.1;
+}
+
+.dietActive {
+  opacity: 1;
+}
+
+.button {
+  background-color: #eee;
+  width: 3.75rem;
+  height: 3.75rem;
+  margin-left: auto;
+  padding: 0;
+  border-radius: 1rem;
+  grid-column: 5 / -1;
+  transition: 500ms linear background-color;
+}
+
+.plus {
+  transition: 500ms ease-in-out transform;
+}
+
+.button:hover {
+  background-color: rgb(255, 120, 120);
+}
+.button:hover .plus {
+  transform: rotate(315deg);
 }

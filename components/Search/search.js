@@ -19,7 +19,7 @@ export default function Search() {
           <Image src='/search.svg' alt='Search icon' width={44} height={44} />
         </button>
         <div className={styles.filter}>
-          <label for='' className={styles.label}>
+          <label htmlFor='time' className={styles.label}>
             <Image
               src='/clock.svg'
               alt='Time icon'
@@ -37,7 +37,7 @@ export default function Search() {
             placeholder='Minutes'
             className={styles.input}
           />
-          <label className={styles.label}>
+          <label htmlFor='dairy' className={styles.label}>
             <Image
               src='/dairy.svg'
               alt='Dairy icon'
@@ -48,7 +48,7 @@ export default function Search() {
             Dairy Free
           </label>
           <input type='checkbox' className={styles.input} id='dairy' />
-          <label className={styles.label}>
+          <label htmlFor='gluten' className={styles.label}>
             <Image
               src='/gluten.svg'
               alt='Gluten icon'
@@ -59,7 +59,7 @@ export default function Search() {
             Gluten Free
           </label>
           <input type='checkbox' className={styles.input} id='gluten' />
-          <label className={styles.label}>
+          <label htmlFor='vegan' className={styles.label}>
             <Image
               src='/vegan.svg'
               alt='Vegan icon'
@@ -70,7 +70,7 @@ export default function Search() {
             Vegan
           </label>
           <input type='checkbox' className={styles.input} id='vegan' />
-          <label className={styles.label}>
+          <label htmlFor='vegetarian' className={styles.label}>
             <Image
               src='/vegetarian.svg'
               alt='Vegetarian icon'

@@ -1,6 +1,7 @@
 @import url('../components/Header/Header.module.css');
 @import url('../components/Search/Search.module.css');
 @import url('../components/Card/Card.module.css');
+@import url('../app/Home.module.css');
 
 :root {
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
