@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-head-element */
 import Header from '../components/Header/Header';
-import Search from '../components/Search/Search';
 
 export default function RootLayout({ children }) {
   return (
@@ -13,7 +12,6 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Header />
-        <Search />
         {children}
       </body>
     </html>

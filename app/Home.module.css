@@ -1,0 +1,7 @@
+.results {
+  margin: auto;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
