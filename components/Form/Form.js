@@ -1,6 +1,6 @@
 import styles from './Form.module.css';
 
-export default function Form({ title, submit, inputs }) {
+export default function Form({ title, submit, inputs, children }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
@@ -22,6 +22,7 @@ export default function Form({ title, submit, inputs }) {
             </>
           );
         })}
+        {children}
         <button type='submit' className={styles.submit}>
           {submit}
         </button>
