@@ -26,6 +26,7 @@ export default function Form({ title, submit, inputs, children }) {
         <button type='submit' className={styles.submit}>
           {submit}
         </button>
+        {children}
       </form>
     </div>
   );

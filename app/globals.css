@@ -3,6 +3,8 @@
 @import url('../components/Search/Search.module.css');
 @import url('../components/Card/Card.module.css');
 @import url('../components/Add/Add.module.css');
+@import url('../components/Popup/Popup.module.css');
+@import url('../components/Form/Form.module.css');
 
 :root {
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',

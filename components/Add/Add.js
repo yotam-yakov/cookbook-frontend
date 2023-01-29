@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import styles from './Add.module.css';
+import Popup from '../Popup/Popup';
+import React from 'react';
 
 export default function Add() {
   let ingredients = 3;
@@ -10,7 +12,7 @@ export default function Add() {
       <button className={styles.toggle}>
         <Image src='/plus.svg' alt='add recipe button' width={40} height={40} />
       </button>
-      <div className={styles.window}>
+      <Popup>
         <form className={styles.popup}>
           <h2 className={styles.title}>Add Your Own Recipe</h2>
           <label htmlFor='title' className={styles.label}>
@@ -165,7 +167,7 @@ export default function Add() {
                   {i + 1}
                   <textarea
                     key={i}
-                    id={`step${i}`}
+                    id={`step${i + 1}`}
                     className={styles.stepInput}
                   />
                 </div>
@@ -185,7 +187,7 @@ export default function Add() {
             Done!
           </button>
         </form>
-      </div>
+      </Popup>
     </div>
   );
 }

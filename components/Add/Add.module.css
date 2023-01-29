@@ -31,21 +31,21 @@
   background-color: rgb(0, 0, 0, 0.6);
   width: 100%;
   height: 100%;
-  padding: 5% 10%;
+  /* padding: 5% 10%; */
   position: fixed;
   top: 0;
   left: 0;
 }
 
 .popup {
-  background-color: var(--color-base);
+  /* background-color: var(--color-base);
   width: 100%;
   max-width: 50rem;
   height: 100%;
   margin: auto;
   padding: 1rem;
   border: 0.4rem solid white;
-  border-radius: 1.5rem;
+  border-radius: 1.5rem; */
   overflow-y: scroll;
   display: grid;
   grid-template-columns: 50% 50%;
@@ -162,7 +162,8 @@
 
 .stepInput {
   width: 100%;
-  height: 3rem;
+  height: 3.25rem;
+  max-width: none;
   margin: 0;
   padding: 0;
 }
@@ -187,7 +188,7 @@
 }
 
 .saveButton:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) translateY(-0.25rem);
   opacity: 0.6;
 }
 
@@ -215,11 +216,15 @@
   cursor: pointer;
   top: 0;
   left: 0;
-  opacity: 0.3;
+  opacity: 0.7;
   transition: 400ms;
   transform: scale(0.8);
   gap: 0.5rem;
   font-size: 1.25rem;
+}
+
+.slider:hover {
+  background-color: var(--color-second);
 }
 
 .checkbox:checked + .slider {
