@@ -69,7 +69,7 @@
   padding: 0;
   border-radius: 1rem;
   grid-column: 5 / -1;
-  transition: 500ms linear background-color;
+  transition: 500ms linear background-color, 150ms linear transform;
 }
 
 .plus {
@@ -77,8 +77,18 @@
 }
 
 .button:hover {
+  transform: scale(1.1);
+  background-color: #bbb;
+}
+
+.buttonActive {
   background-color: rgb(255, 120, 120);
 }
-.button:hover .plus {
+
+.buttonActive:hover {
+  background-color: rgb(255, 120, 120);
+}
+
+.buttonActive .plus {
   transform: rotate(315deg);
 }

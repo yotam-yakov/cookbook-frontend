@@ -1,4 +1,6 @@
+'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import styles from './Card.module.css';
 
 export default function Card({
@@ -11,6 +13,11 @@ export default function Card({
   vegan,
   vegetarian,
 }) {
+  const [isActive, setIsActive] = useState(false);
+
+  const toggleActive = () => {
+    setIsActive(!isActive);
+  };
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
@@ -60,7 +67,11 @@ export default function Card({
         height={32}
         className={`${styles.diet} ${vegetarian ? styles.dietActive : ''}`}
       />
-      <button type='button' className={styles.button}>
+      <button
+        type='button'
+        onClick={toggleActive}
+        className={`${styles.button} ${isActive ? styles.buttonActive : ''}`}
+      >
         <Image
           src='/plus.svg'
           alt='Add button'
