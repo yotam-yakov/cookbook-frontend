@@ -1,18 +1,14 @@
 import './globals.css';
-import Card from '../components/Card/Card';
-import recipes from '../temp/recipes-temp';
-import styles from './Home.module.css';
+import Recipes from '../components/Recipes/Recipes';
 import Search from '../components/Search/Search';
+import data from '../temp/recipes-temp';
+import styles from './Home.module.css';
 
 export default function HomePage() {
   return (
     <div>
       <Search />
-      <div className={styles.results}>
-        {recipes.map((recipe, index) => {
-          return <Card {...recipe} key={index} />;
-        })}
-      </div>
+      <Recipes recipes={data} />
     </div>
   );
 }
