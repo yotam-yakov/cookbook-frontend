@@ -1,0 +1,40 @@
+.container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-template-rows: auto;
+  font-family: var(--font-main);
+}
+
+.imageBox {
+  position: relative;
+  grid-row: 1 / 5;
+}
+
+.image {
+  object-fit: contain;
+}
+
+.title {
+  margin: 0;
+  font-size: 2rem;
+  grid-column: 2 / -1;
+}
+
+.source {
+  margin: 0;
+  grid-column: 2 / -1;
+}
+
+.time {
+  margin: 0;
+  grid-column: 2 / -1;
+}
+
+.diets {
+  grid-column: 2 / -1;
+}
+
+.diet {
+  margin: 0;
+}

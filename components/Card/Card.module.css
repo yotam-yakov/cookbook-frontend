@@ -4,7 +4,7 @@
   height: 388px;
   padding: 0.75rem;
   border-radius: 1.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   display: grid;
   grid-template-columns: repeat(4, 2.5rem) auto;
   grid-template-rows: 4rem auto 3rem 3.75rem;

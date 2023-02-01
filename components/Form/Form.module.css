@@ -7,7 +7,7 @@
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
 }
 
 .title {
@@ -36,7 +36,7 @@
   border-radius: 0.5rem;
   outline: none;
   font-size: 1.75rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   line-height: 3rem;
   transition: 150ms background-color linear, 200ms box-shadow linear;
 }
@@ -57,7 +57,7 @@
   border-radius: 1rem;
   font-size: 1.75rem;
   line-height: 2.5rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
 }
 
 .submit:hover {

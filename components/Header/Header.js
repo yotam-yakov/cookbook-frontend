@@ -18,7 +18,7 @@ export default function Header() {
           height={56}
           priority
         />
-        COOKBOOK
+        Cookbook
       </Link>
       <div className={styles.navbar}>
         <Link

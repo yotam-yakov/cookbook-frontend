@@ -20,7 +20,7 @@
   padding: 1rem;
   border: none;
   font-size: 1.75rem;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 300;
 }
 
@@ -81,7 +81,7 @@
   height: 1.75rem;
   margin: 0.5rem auto;
   border: none;
-  font-family: var(--font-mono);
+  font-family: var(--font-main);
   font-weight: 300;
   font-size: 1.5rem;
   text-align: center;

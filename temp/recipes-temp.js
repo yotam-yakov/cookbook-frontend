@@ -8,6 +8,29 @@ const recipes = [
     gluten: true,
     vegan: false,
     vegetarian: false,
+    ingredients: [
+      {
+        name: 'Bread',
+        amount: 2,
+        measure: 'pcs',
+      },
+      {
+        name: 'Cheese',
+        amount: 100,
+        measure: 'gr',
+      },
+      {
+        name: 'Tomato',
+        amount: 1,
+        measure: 'pcs',
+      },
+      {
+        name: 'Milk',
+        amount: 150,
+        measure: 'ml',
+      },
+    ],
+    steps: ['Mix all Ingredients', 'Pour to a bowl', 'Eat everything'],
   },
   {
     title: 'Another recipe',

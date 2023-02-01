@@ -35,7 +35,7 @@ export default function Add() {
         <Image src='/plus.svg' alt='add recipe button' width={40} height={40} />
       </button>
       {isPopupOpen && (
-        <Popup close={() => setIsPopupOpen(false)}>
+        <Popup onClose={() => setIsPopupOpen(false)}>
           <form className={styles.popup}>
             <h2 className={styles.title}>Add Your Own Recipe</h2>
             <label htmlFor='title' className={styles.label}>
