@@ -82,11 +82,11 @@
 }
 
 .buttonActive {
-  background-color: rgb(255, 120, 120);
+  background-color: var(--color-red);
 }
 
 .buttonActive:hover {
-  background-color: rgb(255, 120, 120);
+  background-color: var(--color-red);
 }
 
 .buttonActive .plus {
