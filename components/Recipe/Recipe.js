@@ -1,7 +1,5 @@
-'use client';
 import Popup from '../Popup/Popup';
 import Image from 'next/image';
-import { useState } from 'react';
 import styles from './Recipe.module.css';
 
 export default function Recipe({
@@ -53,25 +51,27 @@ export default function Recipe({
           </p>
         </div>
         <div className={styles.ingredients}>
-          {ingredients.map((ingredient, index) => {
-            return (
-              <div className={styles.ingredient} key={index}>
-                <p className={styles.iName}>{ingredient.name}</p>
-                <p className={styles.iAmount}>
-                  {ingredient.amount + ' ' + ingredient.measure}
-                </p>
-              </div>
-            );
-          })}
+          {ingredients &&
+            ingredients.map((ingredient, index) => {
+              return (
+                <div className={styles.ingredient} key={index}>
+                  <p className={styles.iName}>{ingredient.name}</p>
+                  <p className={styles.iAmount}>
+                    {ingredient.amount + ' ' + ingredient.measure}
+                  </p>
+                </div>
+              );
+            })}
         </div>
         <div className={styles.steps}>
-          {steps.map((step, index) => {
-            return (
-              <p className={styles.step} key={index}>
-                {index + 1 + '. ' + step}
-              </p>
-            );
-          })}
+          {steps &&
+            steps.map((step, index) => {
+              return (
+                <p className={styles.step} key={index}>
+                  {index + 1 + '. ' + step}
+                </p>
+              );
+            })}
         </div>
       </div>
     </Popup>

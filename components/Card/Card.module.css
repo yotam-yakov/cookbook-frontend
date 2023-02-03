@@ -9,6 +9,14 @@
   grid-template-columns: repeat(4, 2.5rem) auto;
   grid-template-rows: 4rem auto 3rem 3.75rem;
   row-gap: 1rem;
+  transition: 250ms ease-in-out;
+  cursor: pointer;
+}
+
+.container:hover {
+  box-shadow: 0.5rem 0.5rem 0.5rem grey;
+  border: 0.1rem solid grey;
+  transform: scale(1.025);
 }
 
 .title {
@@ -91,4 +99,17 @@
 
 .buttonActive .plus {
   transform: rotate(315deg);
+}
+
+.loading {
+  animation: loading 500ms linear infinite;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

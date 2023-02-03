@@ -7,7 +7,7 @@ import Recipe from '../components/Recipe/Recipe';
 import { useState } from 'react';
 
 export default function HomePage() {
-  const [recipe, setRecipe] = useState('a');
+  const [recipe, setRecipe] = useState();
 
   const closeRecipe = () => {
     setRecipe(undefined);
@@ -16,8 +16,8 @@ export default function HomePage() {
   return (
     <div>
       <Search />
-      <Recipes recipes={data} />
-      {recipe && <Recipe {...data[0]} onClose={closeRecipe} />}
+      <Recipes recipes={data} setRecipe={setRecipe} />
+      {recipe && <Recipe {...recipe} onClose={closeRecipe} />}
     </div>
   );
 }

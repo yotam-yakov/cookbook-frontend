@@ -12,14 +12,21 @@ export default function Card({
   gluten,
   vegan,
   vegetarian,
+  setRecipe,
 }) {
   const [isActive, setIsActive] = useState(false);
 
-  const toggleActive = () => {
+  const openRecipe = () => {
+    setRecipe({ title, image, time, source, dairy, gluten, vegan, vegetarian });
+  };
+
+  const toggleActive = (evt) => {
+    evt.stopPropagation();
+
     setIsActive(!isActive);
   };
   return (
-    <div className={styles.container}>
+    <div onClick={openRecipe} className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
       <Image
         src={image}

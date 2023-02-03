@@ -5,12 +5,7 @@ import styles from './Header.module.css';
 export default function Header() {
   return (
     <div className={styles.header}>
-      <Link
-        className={styles.logo}
-        href='/'
-        target='_blank'
-        rel='noopener noreferrer'
-      >
+      <Link className={styles.logo} href='/' prefetch={false}>
         <Image
           src='/cookbook.png'
           alt='Cookbook Logo'
@@ -22,11 +17,11 @@ export default function Header() {
       </Link>
       <div className={styles.navbar}>
         <Link
-          href='https://google.com/'
-          target='__blank'
+          href='/myrecipes'
+          prefetch={false}
           className={`${styles.link} ${styles.click}`}
         >
-          Link 1
+          My Recipes
         </Link>
         <Link
           href='https://google.com/'
