@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
 import Add from '../components/Add/Add';
+import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 
 export default function RootLayout({ children }) {
@@ -15,6 +16,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         <Add />
+        <Footer />
       </body>
     </html>
   );
