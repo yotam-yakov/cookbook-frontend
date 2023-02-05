@@ -1,7 +1,15 @@
+'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 import styles from './Search.module.css';
 
 export default function Search() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  const toggleFilter = () => {
+    setIsFilterOpen(!isFilterOpen);
+  };
+
   return (
     <div className={styles.container}>
       <form className={styles.form}>
@@ -12,13 +20,17 @@ export default function Search() {
           placeholder='I am hungry...'
           className={styles.query}
         />
-        <button type='button' className={styles.button}>
+        <button type='button' onClick={toggleFilter} className={styles.button}>
           <Image src='/filter.svg' alt='Filter icon' width={28} height={28} />
         </button>
         <button type='submit' className={styles.button}>
           <Image src='/search.svg' alt='Search icon' width={44} height={44} />
         </button>
-        <div className={styles.filter}>
+        <div
+          className={`${styles.filter} ${
+            isFilterOpen ? styles.filterOpen : ''
+          }`}
+        >
           <label htmlFor='time' className={styles.label}>
             <Image
               src='/clock.svg'

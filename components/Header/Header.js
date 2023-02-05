@@ -24,33 +24,29 @@ export default function Header() {
           My Recipes
         </Link>
         <Link
-          href='https://google.com/'
-          target='__blank'
+          href='/savedrecipes'
+          prefetch={false}
           className={`${styles.link} ${styles.click}`}
         >
-          Link 2
+          Saved Recipes
         </Link>
-        <Link
-          href='https://google.com/'
-          target='__blank'
-          className={`${styles.link} ${styles.click}`}
-        >
-          Link 3
-        </Link>
-        <Image
+        {/* <Image
           src='/logged-out.svg'
           alt='logged out icon'
           width={40}
           height={40}
           className={`${styles.account} ${styles.click}`}
-        />
-        <Image
-          src='/logged-in.svg'
-          alt='logged in icon'
-          width={40}
-          height={40}
-          className={`${styles.account} ${styles.click}`}
-        />
+        /> */}
+        <button type='button' className={`${styles.button} ${styles.click}`}>
+          Log Out
+          <Image
+            src='/logged-in.svg'
+            alt='logged in icon'
+            width={40}
+            height={40}
+            className={styles.account}
+          />
+        </button>
       </div>
     </div>
   );
