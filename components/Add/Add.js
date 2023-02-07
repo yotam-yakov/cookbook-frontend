@@ -3,30 +3,65 @@ import Image from 'next/image';
 import styles from './Add.module.css';
 import Popup from '../Popup/Popup';
 import React, { useState } from 'react';
+import InputArray from '../InputArray/InputArray';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [ingredients, setIngredients] = useState(3);
-  const [steps, setSteps] = useState(3);
 
-  const addIngredient = () => {
-    setIngredients(ingredients + 1);
+  const createIngredient = (index) => {
+    return (
+      <div
+        id={`ingredient${index + 1}`}
+        key={index}
+        className={styles.ingredient}
+      >
+        <input
+          type='text'
+          id={`ingredient${index + 1}-name`}
+          className={styles.ingredientName}
+          placeholder='Name'
+        />
+        <input
+          type='number'
+          id={`ingredient${index + 1}-amount`}
+          className={styles.ingredientAmount}
+          placeholder='#'
+        />
+        <select
+          id={`ingredient${index + 1}-measure`}
+          name={`ingredient${index + 1}-measure`}
+          className={styles.ingredientMeasure}
+        >
+          <option value='' disabled hidden selected>
+            Units
+          </option>
+          <option value='tsp'>tsp</option>
+          <option value='tbsp'>tbsp</option>
+          <option value='cups'>cups</option>
+          <option value='g'>g</option>
+          <option value='kg'>kg</option>
+          <option value='ml'>ml</option>
+          <option value='l'>l</option>
+          <option value='oz'>oz</option>
+          <option value='lb'>lb</option>
+          <option value='pinch'>pinch</option>
+          <option value='pcs'>pcs</option>
+        </select>
+      </div>
+    );
   };
 
-  const addStep = () => {
-    setSteps(steps + 1);
-  };
-
-  const removeIngredient = () => {
-    if (ingredients != 1) {
-      setIngredients(ingredients - 1);
-    }
-  };
-
-  const removeStep = () => {
-    if (steps != 1) {
-      setSteps(steps - 1);
-    }
+  const createStep = (index) => {
+    return (
+      <div className={styles.step}>
+        <textarea
+          key={index}
+          id={`step${index + 1}`}
+          placeholder={`Step ${index + 1}`}
+          className={styles.stepInput}
+        />
+      </div>
+    );
   };
 
   return (
@@ -137,122 +172,8 @@ export default function Add() {
                 </span>
               </label>
             </div>
-            <div className={styles.ingredients}>
-              <label className={styles.label}>Ingredients</label>
-              {[...Array(ingredients)].map((e, i) => {
-                return (
-                  <div
-                    id={`ingredient${i + 1}`}
-                    key={i}
-                    className={styles.ingredient}
-                  >
-                    <input
-                      type='text'
-                      id={`ingredient${i + 1}-name`}
-                      className={styles.ingredientName}
-                      placeholder='Name'
-                    />
-                    <input
-                      type='number'
-                      id={`ingredient${i + 1}-amount`}
-                      className={styles.ingredientAmount}
-                      placeholder='#'
-                    />
-                    <select
-                      id={`ingredient${i + 1}-measure`}
-                      name={`ingredient${i + 1}-measure`}
-                      className={styles.ingredientMeasure}
-                    >
-                      <option value='' disabled hidden selected>
-                        Units
-                      </option>
-                      <option value='tsp'>tsp</option>
-                      <option value='tbsp'>tbsp</option>
-                      <option value='cups'>cups</option>
-                      <option value='g'>g</option>
-                      <option value='kg'>kg</option>
-                      <option value='ml'>ml</option>
-                      <option value='l'>l</option>
-                      <option value='oz'>oz</option>
-                      <option value='lb'>lb</option>
-                      <option value='pinch'>pinch</option>
-                      <option value='pcs'>pcs</option>
-                    </select>
-                  </div>
-                );
-              })}
-              <div>
-                <button
-                  type='button'
-                  onClick={removeIngredient}
-                  className={`${styles.addButton} ${
-                    ingredients === 1 ? styles.addButtonDisabled : ''
-                  }`}
-                >
-                  <Image
-                    src='/minus.svg'
-                    alt='remove ingredient slot button'
-                    width={24}
-                    height={24}
-                  />
-                </button>
-                <button
-                  type='button'
-                  onClick={addIngredient}
-                  className={styles.addButton}
-                >
-                  <Image
-                    src='/plus.svg'
-                    alt='add ingredient slot button'
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
-            </div>
-            <div className={styles.steps}>
-              <label className={styles.label}>Steps</label>
-              {[...Array(steps)].map((e, i) => {
-                return (
-                  <div className={styles.step}>
-                    <textarea
-                      key={i}
-                      id={`step${i + 1}`}
-                      placeholder={`Step ${i + 1}`}
-                      className={styles.stepInput}
-                    />
-                  </div>
-                );
-              })}
-              <div>
-                <button
-                  type='button'
-                  onClick={removeStep}
-                  className={`${styles.addButton} ${
-                    steps === 1 ? styles.addButtonDisabled : ''
-                  }`}
-                >
-                  <Image
-                    src='/minus.svg'
-                    alt='remove step slot button'
-                    width={24}
-                    height={24}
-                  />
-                </button>
-                <button
-                  type='button'
-                  onClick={addStep}
-                  className={styles.addButton}
-                >
-                  <Image
-                    src='/plus.svg'
-                    alt='add step slot button'
-                    width={24}
-                    height={24}
-                  />
-                </button>
-              </div>
-            </div>
+            <InputArray creator={createIngredient} title='Ingredients' />
+            <InputArray creator={createStep} title='Steps' />
             <button type='button' className={styles.saveButton}>
               <Image src='/chef.svg' alt="chef's hat" width={24} height={24} />
               Done!
