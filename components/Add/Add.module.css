@@ -153,42 +153,6 @@
   transform: scale(0.95);
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 11.5rem;
-}
-
-.checkbox {
-  display: none;
-}
-
-.slider {
-  height: fit-content;
-  border-radius: 0.5rem;
-  padding: 0.4rem;
-  display: flex;
-  justify-content: center;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  opacity: 0.7;
-  transition: 400ms;
-  transform: scale(0.8);
-  gap: 0.5rem;
-  font-size: 1.25rem;
-}
-
-.slider:hover {
-  background-color: var(--color-second);
-}
-
-.checkbox:checked + .slider {
-  background-color: var(--color-second);
-  transform: scale(1);
-  opacity: 1;
-}
-
 ::-webkit-scrollbar {
   width: 0;
 }

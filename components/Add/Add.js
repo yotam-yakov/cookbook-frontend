@@ -1,9 +1,10 @@
 'use client';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './Add.module.css';
 import Popup from '../Popup/Popup';
-import React, { useState } from 'react';
 import InputArray from '../InputArray/InputArray';
+import Switch from '../Switch/Switch';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -103,74 +104,46 @@ export default function Add() {
               className={styles.input}
             />
             <div className={styles.diets}>
-              <label className={styles.switch}>
-                <input
-                  type='checkbox'
-                  id='isDairy'
-                  className={styles.checkbox}
+              <Switch id='isDairy'>
+                <Image
+                  src='/dairy.svg'
+                  alt='dairy icon'
+                  width={24}
+                  height={24}
+                  className={styles.icon}
                 />
-                <span className={styles.slider}>
-                  <Image
-                    src='/dairy.svg'
-                    alt='dairy icon'
-                    width={24}
-                    height={24}
-                    className={styles.icon}
-                  />
-                  Dairy Free
-                </span>
-              </label>
-              <label className={styles.switch}>
-                <input
-                  type='checkbox'
-                  id='isGluten'
-                  className={styles.checkbox}
+                Dairy Free
+              </Switch>
+              <Switch id='isGluten'>
+                <Image
+                  src='/gluten.svg'
+                  alt='gluten icon'
+                  width={24}
+                  height={24}
+                  className={styles.icon}
                 />
-                <span className={styles.slider}>
-                  <Image
-                    src='/gluten.svg'
-                    alt='gluten icon'
-                    width={24}
-                    height={24}
-                    className={styles.icon}
-                  />
-                  Gluten Free
-                </span>
-              </label>
-              <label className={styles.switch}>
-                <input
-                  type='checkbox'
-                  id='isVegan'
-                  className={styles.checkbox}
+                Gluten Free
+              </Switch>
+              <Switch id='isVegan'>
+                <Image
+                  src='/vegan.svg'
+                  alt='vegan icon'
+                  width={24}
+                  height={24}
+                  className={styles.icon}
                 />
-                <span className={styles.slider}>
-                  <Image
-                    src='/vegan.svg'
-                    alt='vegan icon'
-                    width={24}
-                    height={24}
-                    className={styles.icon}
-                  />
-                  Vegan
-                </span>
-              </label>
-              <label className={styles.switch}>
-                <input
-                  type='checkbox'
-                  id='isVegetarian'
-                  className={styles.checkbox}
+                Vegan
+              </Switch>
+              <Switch id='isVegetarian'>
+                <Image
+                  src='/vegetarian.svg'
+                  alt='vegetarian icon'
+                  width={24}
+                  height={24}
+                  className={styles.icon}
                 />
-                <span className={styles.slider}>
-                  <Image
-                    src='/vegetarian.svg'
-                    alt='vegetarian icon'
-                    width={24}
-                    height={24}
-                    className={styles.icon}
-                  />
-                  Vegetarian
-                </span>
-              </label>
+                Vegetarian
+              </Switch>
             </div>
             <InputArray creator={createIngredient} title='Ingredients' />
             <InputArray creator={createStep} title='Steps' />
