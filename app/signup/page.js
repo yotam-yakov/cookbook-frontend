@@ -25,6 +25,10 @@ export default function SignUp() {
         placeholder: 'Password',
       },
     ],
+    redirect: {
+      url: '/signin',
+      text: 'Already a member? Click here to sign in!',
+    },
   };
 
   return <Form {...signup} />;

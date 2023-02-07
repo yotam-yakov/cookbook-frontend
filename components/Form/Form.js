@@ -1,6 +1,8 @@
+import Link from 'next/link';
 import styles from './Form.module.css';
 
-export default function Form({ title, submit, inputs, children }) {
+export default function Form({ title, submit, inputs, redirect, children }) {
+  console.log(redirect);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
@@ -26,7 +28,9 @@ export default function Form({ title, submit, inputs, children }) {
         <button type='submit' className={styles.submit}>
           {submit}
         </button>
-        {children}
+        <Link href={redirect.url} prefetch={false} className={styles.redirect}>
+          {redirect.text}
+        </Link>
       </form>
     </div>
   );
