@@ -2,7 +2,6 @@ import Link from 'next/link';
 import styles from './Form.module.css';
 
 export default function Form({ title, submit, inputs, redirect, children }) {
-  console.log(redirect);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
@@ -18,7 +17,7 @@ export default function Form({ title, submit, inputs, redirect, children }) {
                 id={input.id}
                 placeholder={input.placeholder}
                 autoComplete='off'
-                className={styles.input}
+                className={`${styles.input} ${input.style}`}
                 key={index}
               />
             </>

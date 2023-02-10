@@ -2,4 +2,14 @@
   margin: 2rem auto;
   font-family: var(--font-second);
   color: grey;
+  display: flex;
+  justify-content: space-between;
+}
+
+.link {
+  transition: 150ms;
+}
+
+.link:hover {
+  opacity: 0.4;
 }
