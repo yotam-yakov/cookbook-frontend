@@ -2,22 +2,18 @@ import Popup from '../Popup/Popup';
 import Image from 'next/image';
 import styles from './Recipe.module.css';
 import { useState } from 'react';
+import usePageStorage from '../../state/pageState';
 
-export default function Recipe({
-  title,
-  image,
-  time,
-  source,
-  servings,
-  dairy,
-  gluten,
-  vegan,
-  vegetarian,
-  ingredients,
-  steps,
-  onClose,
-}) {
-  const [dishes, setDishes] = useState(servings);
+export default function Recipe() {
+  const { recipe, setRecipe } = usePageStorage((state) => ({
+    recipe: state.recipe,
+    setRecipe: state.setRecipe,
+  }));
+  const [dishes, setDishes] = useState(recipe.servings);
+
+  const closePopup = () => {
+    setRecipe({});
+  };
 
   const moreServings = () => {
     setDishes(Number(dishes) + 1);
@@ -34,36 +30,47 @@ export default function Recipe({
   };
 
   return (
-    <Popup onClose={onClose}>
+    <Popup onClose={closePopup}>
       <div className={styles.container}>
         <div className={styles.imageBox}>
-          <Image src={image} alt='recipe image' fill className={styles.image} />
+          <Image
+            src={recipe.image}
+            alt='recipe image'
+            fill
+            className={styles.image}
+          />
         </div>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={styles.title}>{recipe.title}</h2>
         <div className={styles.info}>
           <p className={styles.infoItem}>
             <Image src='/logged-in.svg' alt='source' width={24} height={24} />
-            {source}
+            {recipe.source}
           </p>
           <p className={styles.infoItem}>
             <Image src='/clock.svg' alt='time' width={24} height={24} />
-            {time}
+            {recipe.time}
           </p>
         </div>
         <div className={styles.diets}>
-          <p className={`${styles.diet} ${dairy ? '' : styles.dietOff}`}>
+          <p className={`${styles.diet} ${recipe.dairy ? '' : styles.dietOff}`}>
             <Image src='/dairy.svg' width={28} height={28} />
             Dairy Free
           </p>
-          <p className={`${styles.diet} ${gluten ? '' : styles.dietOff}`}>
+          <p
+            className={`${styles.diet} ${recipe.gluten ? '' : styles.dietOff}`}
+          >
             <Image src='/gluten.svg' width={28} height={28} />
             Gluten Free
           </p>
-          <p className={`${styles.diet} ${vegan ? '' : styles.dietOff}`}>
+          <p className={`${styles.diet} ${recipe.vegan ? '' : styles.dietOff}`}>
             <Image src='/vegan.svg' width={28} height={28} />
             Vegan
           </p>
-          <p className={`${styles.diet} ${vegetarian ? '' : styles.dietOff}`}>
+          <p
+            className={`${styles.diet} ${
+              recipe.vegetarian ? '' : styles.dietOff
+            }`}
+          >
             <Image src='/vegetarian.svg' width={28} height={28} />
             Vegetarian
           </p>
@@ -91,13 +98,13 @@ export default function Recipe({
           </button>
         </div>
         <div className={styles.ingredients}>
-          {ingredients &&
-            ingredients.map((ingredient, index) => {
+          {recipe.ingredients &&
+            recipe.ingredients.map((ingredient, index) => {
               return (
                 <div className={styles.ingredient} key={index}>
                   <p className={styles.iName}>{ingredient.name}</p>
                   <p className={styles.iAmount}>
-                    {ingredient.amount * (dishes / servings) +
+                    {ingredient.amount * (dishes / recipe.servings) +
                       ' ' +
                       ingredient.measure}
                   </p>
@@ -106,8 +113,8 @@ export default function Recipe({
             })}
         </div>
         <div className={styles.steps}>
-          {steps &&
-            steps.map((step, index) => {
+          {recipe.steps &&
+            recipe.steps.map((step, index) => {
               return (
                 <p className={styles.step} key={index}>
                   {index + 1 + '. ' + step}
