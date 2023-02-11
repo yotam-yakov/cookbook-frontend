@@ -5,7 +5,7 @@ export default function Recipes({ recipes, setRecipe }) {
   return (
     <div className={styles.recipes}>
       {recipes.map((recipe, index) => {
-        return <Card {...recipe} setRecipe={setRecipe} key={index} />;
+        return <Card recipe={recipe} setRecipe={setRecipe} key={index} />;
       })}
     </div>
   );

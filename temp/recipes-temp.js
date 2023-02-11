@@ -4,6 +4,7 @@ const recipes = [
     image: '/cookbook.png',
     time: '1:20',
     source: 'Place',
+    servings: 2,
     dairy: true,
     gluten: true,
     vegan: false,

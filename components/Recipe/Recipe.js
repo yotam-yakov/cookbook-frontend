@@ -1,12 +1,14 @@
 import Popup from '../Popup/Popup';
 import Image from 'next/image';
 import styles from './Recipe.module.css';
+import { useState } from 'react';
 
 export default function Recipe({
   title,
   image,
   time,
   source,
+  servings,
   dairy,
   gluten,
   vegan,
@@ -15,6 +17,22 @@ export default function Recipe({
   steps,
   onClose,
 }) {
+  const [dishes, setDishes] = useState(servings);
+
+  const moreServings = () => {
+    setDishes(Number(dishes) + 1);
+  };
+
+  const lessServings = () => {
+    if (dishes != 1) {
+      setDishes(Number(dishes) - 1);
+    }
+  };
+
+  const changeServings = (evt) => {
+    setDishes(evt.target.value);
+  };
+
   return (
     <Popup onClose={onClose}>
       <div className={styles.container}>
@@ -50,6 +68,28 @@ export default function Recipe({
             Vegetarian
           </p>
         </div>
+        <div className={styles.dishes}>
+          <button
+            type='button'
+            onClick={lessServings}
+            className={styles.button}
+          >
+            <Image src='/minus.svg' alt='lower number of dishes' fill />
+          </button>
+          <input
+            type='number'
+            value={dishes}
+            onChange={changeServings}
+            className={styles.dishesInput}
+          />
+          <button
+            type='button'
+            onClick={moreServings}
+            className={styles.button}
+          >
+            <Image src='/plus.svg' alt='add number of dishes' fill />
+          </button>
+        </div>
         <div className={styles.ingredients}>
           {ingredients &&
             ingredients.map((ingredient, index) => {
@@ -57,7 +97,9 @@ export default function Recipe({
                 <div className={styles.ingredient} key={index}>
                   <p className={styles.iName}>{ingredient.name}</p>
                   <p className={styles.iAmount}>
-                    {ingredient.amount + ' ' + ingredient.measure}
+                    {ingredient.amount * (dishes / servings) +
+                      ' ' +
+                      ingredient.measure}
                   </p>
                 </div>
               );
