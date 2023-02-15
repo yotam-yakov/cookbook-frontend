@@ -1,12 +1,12 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
-import usePageStorage from '../../state/pageState';
+import useRecipeStorage from '../../state/useRecipeStorage';
 import styles from './Card.module.css';
 
 export default function Card({ recipe }) {
   const [isActive, setIsActive] = useState(false);
-  const setRecipe = usePageStorage((State) => State.setRecipe);
+  const setRecipe = useRecipeStorage((State) => State.setRecipe);
 
   const openRecipe = () => {
     setRecipe(recipe);

@@ -2,10 +2,10 @@ import Popup from '../Popup/Popup';
 import Image from 'next/image';
 import styles from './Recipe.module.css';
 import { useState } from 'react';
-import usePageStorage from '../../state/pageState';
+import useRecipeStorage from '../../state/useRecipeStorage';
 
 export default function Recipe() {
-  const { recipe, setRecipe } = usePageStorage((state) => ({
+  const { recipe, setRecipe } = useRecipeStorage((state) => ({
     recipe: state.recipe,
     setRecipe: state.setRecipe,
   }));

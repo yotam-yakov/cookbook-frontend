@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
-const usePageStorage = create((set) => ({
+const useRecipeStorage = create((set) => ({
   recipe: {},
   setRecipe: (recipe) => set(() => ({ recipe: { ...recipe } })),
 }));
 
-export default usePageStorage;
+export default useRecipeStorage;
