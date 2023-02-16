@@ -8,13 +8,11 @@ export default function SignIn() {
     inputs: [
       {
         id: 'username',
-        title: 'Username',
         type: 'text',
         placeholder: 'Username',
       },
       {
         id: 'password',
-        title: 'Password',
         type: 'password',
         placeholder: 'Password',
       },

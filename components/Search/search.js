@@ -11,7 +11,7 @@ export default function Search() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.search}>
       <form className={styles.form}>
         <input
           type='text'

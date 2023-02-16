@@ -5,9 +5,41 @@ import styles from './Add.module.css';
 import Popup from '../Popup/Popup';
 import InputArray from '../InputArray/InputArray';
 import Switch from '../Switch/Switch';
+import Input from '../Input/Input';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const inputs = [
+    {
+      id: 'title',
+      title: 'Title',
+      type: 'text',
+      placeholder: 'Give your recipe a title',
+      style: styles.input,
+    },
+    {
+      id: 'time',
+      title: 'Time',
+      type: 'number',
+      placeholder: 'How much time does it take?',
+      style: styles.input,
+    },
+    {
+      id: 'image',
+      title: 'Image',
+      type: 'text',
+      placeholder: 'You can link an image',
+      style: styles.input,
+    },
+    {
+      id: 'servings',
+      title: 'Dishes',
+      type: 'number',
+      placeholder: 'How many dishes?',
+      style: styles.input,
+    },
+  ];
 
   const createIngredient = (index) => {
     return (
@@ -66,43 +98,17 @@ export default function Add() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.add}>
       <button onClick={() => setIsPopupOpen(true)} className={styles.toggle}>
         <Image src='/plus.svg' alt='add recipe button' width={40} height={40} />
       </button>
       {isPopupOpen && (
         <Popup onClose={() => setIsPopupOpen(false)}>
           <form className={styles.popup}>
+            {inputs.map((input, index) => {
+              return <Input input={input} index={index} />;
+            })}
             <h2 className={styles.title}>Add Your Own Recipe</h2>
-            <label htmlFor='title' className={styles.label}>
-              Title
-            </label>
-            <input
-              type='text'
-              id='title'
-              placeholder='Give your recipe a title'
-              className={styles.input}
-            />
-            <label htmlFor='time' className={styles.label}>
-              Time
-            </label>
-            <input
-              type='number'
-              id='time'
-              min='5'
-              max='240'
-              placeholder='Minutes'
-              className={styles.input}
-            />
-            <label htmlFor='image' className={styles.label}>
-              Image (optional)
-            </label>
-            <input
-              type='text'
-              id='image'
-              placeholder='URL'
-              className={styles.input}
-            />
             <div className={styles.diets}>
               <Switch id='isDairy'>
                 <Image

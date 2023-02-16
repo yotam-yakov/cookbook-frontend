@@ -2,6 +2,7 @@
 @import url('../components/Header/Header.module.css');
 @import url('../components/Search/Search.module.css');
 @import url('../components/Card/Card.module.css');
+@import url('../components/Input/Input.module.css');
 @import url('../components/Add/Add.module.css');
 @import url('../components/Popup/Popup.module.css');
 @import url('../components/Form/Form.module.css');

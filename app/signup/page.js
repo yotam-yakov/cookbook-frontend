@@ -8,19 +8,16 @@ export default function SignUp() {
     inputs: [
       {
         id: 'email',
-        title: 'Email',
         type: 'text',
         placeholder: 'Email',
       },
       {
         id: 'username',
-        title: 'Username',
         type: 'text',
         placeholder: 'Username',
       },
       {
         id: 'password',
-        title: 'Password',
         type: 'password',
         placeholder: 'Password',
       },
