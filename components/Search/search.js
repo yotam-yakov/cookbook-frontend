@@ -25,6 +25,7 @@ export default function Search() {
           id='search'
           name='search'
           placeholder='I am hungry...'
+          autoComplete='off'
           className={styles.query}
           required
         />

@@ -1,9 +1,13 @@
 /* eslint-disable @next/next/no-head-element */
+'use client';
 import Add from '../components/Add/Add';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
+import useUserStorage from '../state/useUserStorage';
 
 export default function RootLayout({ children }) {
+  const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
+
   return (
     <html>
       <head>
@@ -15,7 +19,7 @@ export default function RootLayout({ children }) {
       <body>
         <Header />
         {children}
-        <Add />
+        {isLoggedIn && <Add />}
         <Footer />
       </body>
     </html>
