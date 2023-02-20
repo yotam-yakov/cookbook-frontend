@@ -35,9 +35,7 @@ export default function Search() {
           <Image src='/search.svg' alt='Search icon' width={44} height={44} />
         </button>
         <div
-          className={`${styles.filter} ${
-            isFilterOpen ? styles.filterOpen : ''
-          }`}
+          className={`${styles.filter} ${isFilterOpen && styles.filterOpen}`}
         >
           <label htmlFor='time' className={styles.label}>
             <Image

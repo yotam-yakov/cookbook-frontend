@@ -52,26 +52,42 @@ export default function Recipe() {
           </p>
         </div>
         <div className={styles.diets}>
-          <p className={`${styles.diet} ${recipe.dairy ? '' : styles.dietOff}`}>
-            <Image src='/dairy.svg' width={28} height={28} />
+          <p className={`${styles.diet} ${!recipe.dairy && styles.dietOff}`}>
+            <Image
+              src='/dairy.svg'
+              alt={`${!recipe.dairy ? 'disabled ' : ''}dairy free icon`}
+              width={28}
+              height={28}
+            />
             Dairy Free
           </p>
-          <p
-            className={`${styles.diet} ${recipe.gluten ? '' : styles.dietOff}`}
-          >
-            <Image src='/gluten.svg' width={28} height={28} />
+          <p className={`${styles.diet} ${!recipe.gluten && styles.dietOff}`}>
+            <Image
+              src='/gluten.svg'
+              alt={`${!recipe.gluten ? 'disabled ' : ''}gluten free icon`}
+              width={28}
+              height={28}
+            />
             Gluten Free
           </p>
-          <p className={`${styles.diet} ${recipe.vegan ? '' : styles.dietOff}`}>
-            <Image src='/vegan.svg' width={28} height={28} />
+          <p className={`${styles.diet} ${!recipe.vegan && styles.dietOff}`}>
+            <Image
+              src='/vegan.svg'
+              alt={`${!recipe.vegan ? 'disabled ' : ''}vegan icon`}
+              width={28}
+              height={28}
+            />
             Vegan
           </p>
           <p
-            className={`${styles.diet} ${
-              recipe.vegetarian ? '' : styles.dietOff
-            }`}
+            className={`${styles.diet} ${!recipe.vegetarian && styles.dietOff}`}
           >
-            <Image src='/vegetarian.svg' width={28} height={28} />
+            <Image
+              src='/vegetarian.svg'
+              alt={`${!recipe.vegetarian ? 'disabled ' : ''}vegetarian icon`}
+              width={28}
+              height={28}
+            />
             Vegetarian
           </p>
         </div>

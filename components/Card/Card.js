@@ -43,35 +43,33 @@ export default function Card({ recipe }) {
         alt='Dairy icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${recipe.dairy ? styles.dietActive : ''}`}
+        className={`${styles.diet} ${recipe.dairy && styles.dietActive}`}
       />
       <Image
         src='/gluten.svg'
         alt='Gluten icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${recipe.gluten ? styles.dietActive : ''}`}
+        className={`${styles.diet} ${recipe.gluten && styles.dietActive}`}
       />
       <Image
         src='/vegan.svg'
         alt='Vegan icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${recipe.vegan ? styles.dietActive : ''}`}
+        className={`${styles.diet} ${recipe.vegan && styles.dietActive}`}
       />
       <Image
         src='/vegetarian.svg'
         alt='Vegetarian icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${
-          recipe.vegetarian ? styles.dietActive : ''
-        }`}
+        className={`${styles.diet} ${recipe.vegetarian && styles.dietActive}`}
       />
       <button
         type='button'
         onClick={toggleActive}
-        className={`${styles.button} ${isActive ? styles.buttonActive : ''}`}
+        className={`${styles.button} ${isActive && styles.buttonActive}`}
       >
         <Image
           src='/plus.svg'

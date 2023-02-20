@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import styles from './InputArray.module.css';
 
-export default function InputArray({ creator, title }) {
+export default function InputArray({ element, title }) {
   const [inputs, setInputs] = useState(3);
 
   const addInput = () => {
@@ -20,14 +20,14 @@ export default function InputArray({ creator, title }) {
     <div className={styles.inputArray}>
       <h3 className={styles.title}>{title}</h3>
       {[...Array(inputs)].map((e, i) => {
-        return <Fragment key={i}>{creator(i)}</Fragment>;
+        return <Fragment key={i}>{element(i)}</Fragment>;
       })}
       <div>
         <button
           type='button'
           onClick={removeInput}
           className={`${styles.addButton} ${
-            inputs === 1 ? styles.addButtonDisabled : ''
+            inputs === 1 && styles.addButtonDisabled
           }`}
         >
           <Image

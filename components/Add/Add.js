@@ -152,8 +152,8 @@ export default function Add() {
                 Vegetarian
               </Switch>
             </div>
-            <InputArray creator={createIngredient} title='Ingredients' />
-            <InputArray creator={createStep} title='Steps' />
+            <InputArray element={createIngredient} title='Ingredients' />
+            <InputArray element={createStep} title='Steps' />
             <button type='button' className={styles.saveButton}>
               <Image src='/chef.svg' alt="chef's hat" width={24} height={24} />
               Done!

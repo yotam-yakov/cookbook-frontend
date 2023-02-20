@@ -35,6 +35,5 @@ export default function Feedback() {
     },
   };
 
-  console.log(styles.title);
   return <Form {...feedback} />;
 }
