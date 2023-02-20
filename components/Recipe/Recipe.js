@@ -5,14 +5,14 @@ import { useState } from 'react';
 import useRecipeStorage from '../../state/useRecipeStorage';
 
 export default function Recipe() {
-  const { recipe, setRecipe } = useRecipeStorage((state) => ({
+  const { recipe, clearRecipe } = useRecipeStorage((state) => ({
     recipe: state.recipe,
-    setRecipe: state.setRecipe,
+    clearRecipe: state.clearRecipe,
   }));
   const [dishes, setDishes] = useState(recipe.servings);
 
   const closePopup = () => {
-    setRecipe({});
+    clearRecipe({});
   };
 
   const moreServings = () => {

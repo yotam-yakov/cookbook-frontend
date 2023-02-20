@@ -2,9 +2,15 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Search.module.css';
+import { submitSearch } from '../../api/recipes/api';
+import useValuesStorage from '../../state/useValuesStorage';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const { values, handleChange } = useValuesStorage((state) => ({
+    values: state.values,
+    handleChange: state.handleChange,
+  }));
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -14,6 +20,8 @@ export default function Search() {
     <div className={styles.search}>
       <form className={styles.form}>
         <input
+          value={values.search || ''}
+          onChange={handleChange}
           type='text'
           id='search'
           name='search'
