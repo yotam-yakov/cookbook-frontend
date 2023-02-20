@@ -39,7 +39,10 @@ const useValuesStorage = create((set) => ({
   handleChange: (evt) =>
     set((state) => ({
       values: { ...state.values, [evt.target.name]: evt.target.value },
-      errors: { ...state.errors, [name]: evt.target.validationMessage },
+      errors: {
+        ...state.errors,
+        [evt.target.name]: evt.target.validationMessage,
+      },
       isValid: evt.target.closest('form').checkValidity(),
     })),
 }));

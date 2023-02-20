@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import styles from './Input.module.css';
 
-export default function Input({ input, index }) {
+export default function Input({ input }) {
   return (
     <Fragment>
       {input.title && (
-        <label htmlFor={input.id} className={styles.label} key={index}>
+        <label htmlFor={input.id} className={styles.label}>
           {input.title}
         </label>
       )}
@@ -15,7 +15,6 @@ export default function Input({ input, index }) {
         placeholder={input.placeholder}
         autoComplete='off'
         className={`${styles.input} ${input.style}`}
-        key={index}
       />
     </Fragment>
   );

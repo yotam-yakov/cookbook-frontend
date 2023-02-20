@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Search.module.css';
-import { submitSearch } from '../../api/recipes/api';
 import useValuesStorage from '../../state/useValuesStorage';
 
 export default function Search() {
@@ -27,6 +26,7 @@ export default function Search() {
           name='search'
           placeholder='I am hungry...'
           className={styles.query}
+          required
         />
         <button type='button' onClick={toggleFilter} className={styles.button}>
           <Image src='/filter.svg' alt='Filter icon' width={28} height={28} />

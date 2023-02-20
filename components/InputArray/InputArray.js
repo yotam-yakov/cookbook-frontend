@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import styles from './InputArray.module.css';
 
@@ -20,7 +20,7 @@ export default function InputArray({ creator, title }) {
     <div className={styles.inputArray}>
       <h3 className={styles.title}>{title}</h3>
       {[...Array(inputs)].map((e, i) => {
-        return creator(i);
+        return <Fragment key={i}>{creator(i)}</Fragment>;
       })}
       <div>
         <button

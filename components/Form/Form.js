@@ -8,22 +8,7 @@ export default function Form({ title, submit, inputs, redirect, children }) {
       <h2 className={styles.title}>{title}</h2>
       <form className={styles.form}>
         {inputs.map((input, index) => {
-          return (
-            <Input input={input} index={index} />
-            // <>
-            //   <label htmlFor={input.id} className={styles.label} key={index}>
-            //     {input.title}
-            //   </label>
-            //   <input
-            //     type={input.type}
-            //     id={input.id}
-            //     placeholder={input.placeholder}
-            //     autoComplete='off'
-            //     className={`${styles.input} ${input.style}`}
-            //     key={index}
-            //   />
-            // </>
-          );
+          return <Input input={input} key={index} />;
         })}
         {children}
         <button type='submit' className={styles.submit}>

@@ -61,11 +61,12 @@ export default function Add() {
           placeholder='#'
         />
         <select
+          defaultValue=''
           id={`ingredient${index + 1}-measure`}
           name={`ingredient${index + 1}-measure`}
           className={styles.ingredientMeasure}
         >
-          <option value='' disabled hidden selected>
+          <option value='' hidden>
             Units
           </option>
           <option value='tsp'>tsp</option>
@@ -106,7 +107,7 @@ export default function Add() {
         <Popup onClose={() => setIsPopupOpen(false)}>
           <form className={styles.popup}>
             {inputs.map((input, index) => {
-              return <Input input={input} index={index} />;
+              return <Input input={input} key={index} />;
             })}
             <h2 className={styles.title}>Add Your Own Recipe</h2>
             <div className={styles.diets}>
