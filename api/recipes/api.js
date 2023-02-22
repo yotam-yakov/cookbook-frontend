@@ -1,4 +1,5 @@
 import axios from 'axios';
+import convertRecipe from './convert';
 
 const api = axios.create({
   baseURL: 'https://api.spoonacular.com/recipes',
@@ -13,9 +14,16 @@ const submitSearch = (query) => {
       params: {
         query: query,
         addRecipeInformation: true,
+        fillIngredients: true,
+        number: 20,
       },
     })
-    .then((res) => console.log(res))
+    .then((res) => {
+      console.log(res);
+      res.data.results.forEach((element) => {
+        console.log(convertRecipe(element));
+      });
+    })
     .catch((err) => console.log(err));
 };
 

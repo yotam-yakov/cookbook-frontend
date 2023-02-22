@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Search.module.css';
 import useValuesStorage from '../../state/useValuesStorage';
+import { submitSearch } from '../../api/recipes/api';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,9 +16,14 @@ export default function Search() {
     setIsFilterOpen(!isFilterOpen);
   };
 
+  const onSubmit = (evt) => {
+    evt.preventDefault();
+    submitSearch(values.search);
+  };
+
   return (
     <div className={styles.search}>
-      <form className={styles.form}>
+      <form onSubmit={onSubmit} className={styles.form}>
         <input
           value={values.search || ''}
           onChange={handleChange}

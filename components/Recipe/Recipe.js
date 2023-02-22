@@ -114,7 +114,7 @@ export default function Recipe() {
           </button>
         </div>
         <div className={styles.ingredients}>
-          {recipe.ingredients &&
+          {recipe.ingredients ? (
             recipe.ingredients.map((ingredient, index) => {
               return (
                 <div className={styles.ingredient} key={index}>
@@ -126,18 +126,25 @@ export default function Recipe() {
                   </p>
                 </div>
               );
-            })}
+            })
+          ) : (
+            <p>No ingredients provided</p>
+          )}
         </div>
-        <div className={styles.steps}>
-          {recipe.steps &&
-            recipe.steps.map((step, index) => {
-              return (
-                <p className={styles.step} key={index}>
-                  {index + 1 + '. ' + step}
-                </p>
-              );
-            })}
-        </div>
+        {recipe.steps ? (
+          <div className={styles.steps}>
+            {recipe.steps &&
+              recipe.steps.map((step, index) => {
+                return (
+                  <p className={styles.step} key={index}>
+                    {index + 1 + '. ' + step}
+                  </p>
+                );
+              })}
+          </div>
+        ) : (
+          <p>No instructions provided</p>
+        )}
       </div>
     </Popup>
   );
