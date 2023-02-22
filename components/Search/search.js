@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './Search.module.css';
 import useValuesStorage from '../../state/useValuesStorage';
 import { submitSearch } from '../../api/recipes/api';
+import useRecipeStorage from '../../state/useRecipeStorage';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -11,6 +12,8 @@ export default function Search() {
     values: state.values,
     handleChange: state.handleChange,
   }));
+  const setRecipes = useRecipeStorage((state) => state.setRecipes);
+  const recipes = useRecipeStorage((state) => state.recipes);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -18,7 +21,13 @@ export default function Search() {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    submitSearch(values.search);
+    submitSearch(values.search)
+      .then((recipes) => {
+        console.log(recipes);
+        console.log(setRecipes);
+        setRecipes(recipes);
+      })
+      .then(() => console.log(recipes));
   };
 
   return (

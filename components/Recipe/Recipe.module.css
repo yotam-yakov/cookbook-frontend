@@ -1,7 +1,7 @@
 .container {
   position: relative;
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 3fr 4fr;
   grid-template-rows: auto;
   row-gap: 1rem;
   font-family: var(--font-main);
@@ -97,12 +97,12 @@
 }
 
 .ingredients {
-  margin: 0 4rem;
+  margin: 0 2rem;
   display: flex;
   flex-direction: column;
   font-family: var(--font-hand);
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 1.2s5rem;
+  font-weight: 700;
   text-align: center;
 }
 
@@ -126,7 +126,7 @@
   margin-left: auto;
 }
 
-.steps {
+.instructions {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -135,6 +135,6 @@
   font-weight: 700;
 }
 
-.step {
+.instruction {
   margin: 0;
 }

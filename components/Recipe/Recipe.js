@@ -120,7 +120,10 @@ export default function Recipe() {
                 <div className={styles.ingredient} key={index}>
                   <p className={styles.iName}>{ingredient.name}</p>
                   <p className={styles.iAmount}>
-                    {ingredient.amount * (dishes / recipe.servings) +
+                    {Math.round(
+                      ingredient.amount * (dishes / recipe.servings) * 10
+                    ) /
+                      10 +
                       ' ' +
                       ingredient.measure}
                   </p>
@@ -131,13 +134,13 @@ export default function Recipe() {
             <p>No ingredients provided</p>
           )}
         </div>
-        {recipe.steps ? (
-          <div className={styles.steps}>
-            {recipe.steps &&
-              recipe.steps.map((step, index) => {
+        {recipe.instructions ? (
+          <div className={styles.instructions}>
+            {recipe.instructions &&
+              recipe.instructions.map((instruction, index) => {
                 return (
-                  <p className={styles.step} key={index}>
-                    {index + 1 + '. ' + step}
+                  <p className={styles.instruction} key={index}>
+                    {index + 1 + '. ' + instruction}
                   </p>
                 );
               })}

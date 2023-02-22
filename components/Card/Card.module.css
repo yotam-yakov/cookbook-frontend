@@ -26,7 +26,6 @@
   grid-column: 1 / -1;
   line-height: 2rem;
   overflow: hidden;
-  word-spacing: -0.25rem;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -51,12 +50,14 @@
 }
 
 .source {
+  max-width: 8rem;
   margin: auto;
   margin-right: 0;
   grid-column: 4 / -1;
   grid-row: 3 / 4;
   font-size: 1.25rem;
   text-align: right;
+  text-overflow: ellipsis;
 }
 
 .diet {

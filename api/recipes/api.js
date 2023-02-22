@@ -20,9 +20,13 @@ const submitSearch = (query) => {
     })
     .then((res) => {
       console.log(res);
+      const convertedRecipes = res.data.results.map((recipe) =>
+        convertRecipe(recipe)
+      );
       res.data.results.forEach((element) => {
         console.log(convertRecipe(element));
       });
+      return convertedRecipes;
     })
     .catch((err) => console.log(err));
 };
