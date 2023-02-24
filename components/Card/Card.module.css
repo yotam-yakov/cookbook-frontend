@@ -1,46 +1,46 @@
 .container {
-  background-color: white;
-  width: 288px;
-  height: 388px;
-  padding: 0.75rem;
-  border-radius: 1.5rem;
-  font-family: var(--font-main);
   display: grid;
-  grid-template-columns: repeat(4, 2.5rem) auto;
   grid-template-rows: 4rem auto 3rem 3.75rem;
+  grid-template-columns: repeat(4, 2.5rem) auto;
   row-gap: 1rem;
   transition: 250ms ease-in-out;
   cursor: pointer;
+  border-radius: 1.5rem;
+  background-color: white;
+  padding: 0.75rem;
+  width: 288px;
+  height: 388px;
+  font-family: var(--font-main);
 }
 
 .container:hover {
+  transform: scale(1.025);
   box-shadow: 0.5rem 0.5rem 0.5rem grey;
   border: 0.1rem solid grey;
-  transform: scale(1.025);
 }
 
 .title {
-  width: 264px;
-  max-height: 4rem;
-  margin: 0;
-  grid-column: 1 / -1;
-  line-height: 2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  display: -webkit-box;
+  grid-column: 1 / -1;
+  margin: 0;
+  width: 264px;
+  max-height: 4rem;
+  overflow: hidden;
+  line-height: 2rem;
+  text-overflow: ellipsis;
 }
 
 .image {
-  margin: 0;
   grid-column: 1 / -1;
+  margin: 0;
 }
 
 .time {
-  margin: auto 0;
-  grid-column: 1 / 4;
   grid-row: 3 / 4;
+  grid-column: 1 / 4;
+  margin: auto 0;
   font-size: 1.5rem;
   line-height: 1.5rem;
 }
@@ -50,20 +50,20 @@
 }
 
 .source {
-  max-width: 8rem;
+  grid-row: 3 / 4;
+  grid-column: 4 / -1;
   margin: auto;
   margin-right: 0;
-  grid-column: 4 / -1;
-  grid-row: 3 / 4;
+  max-width: 8rem;
   font-size: 1.25rem;
   text-align: right;
   text-overflow: ellipsis;
 }
 
 .diet {
+  opacity: 0.1;
   margin: auto;
   margin-left: 0;
-  opacity: 0.1;
 }
 
 .dietActive {
@@ -71,14 +71,34 @@
 }
 
 .button {
-  background-color: #eee;
-  width: 3.75rem;
-  height: 3.75rem;
-  margin-left: auto;
-  padding: 0;
-  border-radius: 1rem;
+  position: relative;
   grid-column: 5 / -1;
   transition: 500ms linear background-color, 150ms linear transform;
+  margin-left: auto;
+  border-radius: 1rem;
+  background-color: #eee;
+  padding: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  align-items: center;
+  opacity: 0;
+  transition: 150ms linear opacity;
+  margin: 0;
+  border: 1px solid var(--color-red);
+  border-radius: 1rem;
+  background-color: #bbb;
+  padding: 0.25rem;
+  width: 100%;
+  height: 100%;
+  color: var(--color-red);
+  font-weight: 700;
+  font-size: 1rem;
+  font-family: var(--font-main);
 }
 
 .plus {
@@ -88,6 +108,11 @@
 .button:hover {
   transform: scale(1.1);
   background-color: #bbb;
+}
+
+.button:hover .tooltip {
+  display: flex;
+  opacity: 1;
 }
 
 .buttonActive {

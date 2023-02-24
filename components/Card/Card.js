@@ -1,22 +1,30 @@
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import useRecipeStorage from '../../state/useRecipeStorage';
+import useUserStorage from '../../state/useUserStorage';
 import styles from './Card.module.css';
 
 export default function Card({ recipe }) {
   const [isActive, setIsActive] = useState(false);
   const setRecipe = useRecipeStorage((State) => State.setRecipe);
+  const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
+  const router = useRouter();
+
+  const toggleActive = (evt) => {
+    evt.stopPropagation();
+    if (isLoggedIn) {
+      setIsActive(!isActive);
+    } else {
+      router.push('/signin');
+    }
+  };
 
   const openRecipe = () => {
     setRecipe(recipe);
   };
 
-  const toggleActive = (evt) => {
-    evt.stopPropagation();
-
-    setIsActive(!isActive);
-  };
   return (
     <div onClick={openRecipe} className={styles.container}>
       <h2 className={styles.title}>{recipe.title}</h2>
@@ -78,6 +86,7 @@ export default function Card({ recipe }) {
           height={32}
           className={styles.plus}
         />
+        {!isLoggedIn && <p className={styles.tooltip}>Log in to save</p>}
       </button>
     </div>
   );
