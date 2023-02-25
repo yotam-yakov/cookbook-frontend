@@ -8,14 +8,14 @@ const api = axios.create({
   },
 });
 
-const submitSearch = (query) => {
+const submitSearch = (search) => {
   return api
     .get('/complexSearch', {
       params: {
-        query: query,
         addRecipeInformation: true,
         fillIngredients: true,
         number: 20,
+        ...search,
       },
     })
     .then((res) => {
@@ -23,12 +23,8 @@ const submitSearch = (query) => {
       const convertedRecipes = res.data.results.map((recipe) =>
         convertRecipe(recipe)
       );
-      res.data.results.forEach((element) => {
-        console.log(convertRecipe(element));
-      });
       return convertedRecipes;
-    })
-    .catch((err) => console.log(err));
+    });
 };
 
 export { submitSearch };

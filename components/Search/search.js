@@ -8,12 +8,15 @@ import useRecipeStorage from '../../state/useRecipeStorage';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const { values, handleChange } = useValuesStorage((state) => ({
-    values: state.values,
-    handleChange: state.handleChange,
-  }));
+  const { values, switches, handleChange, handleSwitches } = useValuesStorage(
+    (state) => ({
+      values: state.values,
+      switches: state.switches,
+      handleChange: state.handleChange,
+      handleSwitches: state.handleSwitches,
+    })
+  );
   const setRecipes = useRecipeStorage((state) => state.setRecipes);
-  const recipes = useRecipeStorage((state) => state.recipes);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -21,13 +24,22 @@ export default function Search() {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
-    submitSearch(values.search)
+    const search = {
+      query: values.search,
+      diet: `${switches.vegan ? 'vegan,' : ''}${
+        switches.vegetarian ? 'vegetarian' : ''
+      }`,
+      intolerances: `${switches.dairy ? 'dairy,' : ''}${
+        switches.gluten ? 'gluten' : ''
+      }`,
+      maxReadyTime: values.time ? values.time : undefined,
+    };
+
+    submitSearch(search)
       .then((recipes) => {
-        console.log(recipes);
-        console.log(setRecipes);
         setRecipes(recipes);
       })
-      .then(() => console.log(recipes));
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -65,6 +77,8 @@ export default function Search() {
           </label>
           <input
             type='number'
+            onChange={handleChange}
+            name='time'
             id='time'
             min='5'
             max='240'
@@ -81,7 +95,13 @@ export default function Search() {
             />
             Dairy Free
           </label>
-          <input type='checkbox' className={styles.input} id='dairy' />
+          <input
+            type='checkbox'
+            name='dairy'
+            onChange={handleSwitches}
+            className={styles.input}
+            id='dairy'
+          />
           <label htmlFor='gluten' className={styles.label}>
             <Image
               src='/gluten.svg'
@@ -92,7 +112,13 @@ export default function Search() {
             />
             Gluten Free
           </label>
-          <input type='checkbox' className={styles.input} id='gluten' />
+          <input
+            type='checkbox'
+            name='gluten'
+            onChange={handleSwitches}
+            className={styles.input}
+            id='gluten'
+          />
           <label htmlFor='vegan' className={styles.label}>
             <Image
               src='/vegan.svg'
@@ -103,7 +129,13 @@ export default function Search() {
             />
             Vegan
           </label>
-          <input type='checkbox' className={styles.input} id='vegan' />
+          <input
+            type='checkbox'
+            name='vegan'
+            onChange={handleSwitches}
+            className={styles.input}
+            id='vegan'
+          />
           <label htmlFor='vegetarian' className={styles.label}>
             <Image
               src='/vegetarian.svg'
@@ -114,7 +146,13 @@ export default function Search() {
             />
             Vegetarian
           </label>
-          <input type='checkbox' className={styles.input} id='vegetarian' />
+          <input
+            type='checkbox'
+            name='vegetarian'
+            onChange={handleSwitches}
+            className={styles.input}
+            id='vegetarian'
+          />
         </div>
       </form>
     </div>

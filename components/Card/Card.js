@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useRecipeStorage from '../../state/useRecipeStorage';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Card.module.css';
@@ -12,7 +12,7 @@ export default function Card({ recipe }) {
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
   const router = useRouter();
 
-  const toggleActive = (evt) => {
+  const saveRecipe = (evt) => {
     evt.stopPropagation();
     if (isLoggedIn) {
       setIsActive(!isActive);
@@ -76,7 +76,7 @@ export default function Card({ recipe }) {
       />
       <button
         type='button'
-        onClick={toggleActive}
+        onClick={saveRecipe}
         className={`${styles.button} ${isActive && styles.buttonActive}`}
       >
         <Image
