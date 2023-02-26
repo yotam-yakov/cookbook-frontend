@@ -1,8 +1,6 @@
 'use client';
-import './globals.css';
 import Recipes from '../components/Recipes/Recipes';
 import Search from '../components/Search/Search';
-import data from '../temp/recipes-temp';
 import Recipe from '../components/Recipe/Recipe';
 import useRecipeStorage from '../state/useRecipeStorage';
 import { Fragment } from 'react';

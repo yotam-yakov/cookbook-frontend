@@ -6,13 +6,13 @@ export default function Form({ title, submit, inputs, redirect, children }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
-      <form className={styles.form}>
+      <form onSubmit={submit.handler} className={styles.form}>
         {inputs.map((input, index) => {
           return <Input input={input} key={index} />;
         })}
         {children}
         <button type='submit' className={styles.submit}>
-          {submit}
+          {submit.text}
         </button>
         {redirect && (
           <Link

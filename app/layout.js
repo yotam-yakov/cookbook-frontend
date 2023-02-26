@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-head-element */
 'use client';
+import './globals.css';
 import Add from '../components/Add/Add';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
