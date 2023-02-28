@@ -13,4 +13,24 @@ const signIn = ({ email, password }) => {
     .then((res) => res.data.token);
 };
 
-export { signIn };
+const signUp = ({ email, name, password }) => {
+  return api
+    .post('/signup', {
+      email,
+      name,
+      password,
+    })
+    .then((res) => console.log(res));
+};
+
+const addRecipe = (recipe, jwt) => {
+  return api
+    .post('/recipes', recipe, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    .then((res) => console.log(res));
+};
+
+export { signIn, signUp, addRecipe };

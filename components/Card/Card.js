@@ -2,20 +2,29 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { addRecipe } from '../../api/cookbook/api';
 import useRecipeStorage from '../../state/useRecipeStorage';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Card.module.css';
 
 export default function Card({ recipe }) {
   const [isActive, setIsActive] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const setRecipe = useRecipeStorage((State) => State.setRecipe);
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
   const router = useRouter();
+  const jwt = localStorage.getItem('jwt');
 
   const saveRecipe = (evt) => {
     evt.stopPropagation();
     if (isLoggedIn) {
-      setIsActive(!isActive);
+      setIsLoading(true);
+      addRecipe(recipe, jwt)
+        .then(() => {
+          setIsActive(true);
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoading(false));
     } else {
       router.push('/signin');
     }
@@ -84,7 +93,7 @@ export default function Card({ recipe }) {
           alt='Add button'
           width={32}
           height={32}
-          className={styles.plus}
+          className={`${styles.plus} ${isLoading && styles.loading}`}
         />
         {!isLoggedIn && <p className={styles.tooltip}>Log in to save</p>}
       </button>

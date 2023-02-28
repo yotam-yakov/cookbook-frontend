@@ -29,6 +29,7 @@ const convertInstructions = (instructions) => {
 
 const convertRecipe = (recipe) => {
   const {
+    id,
     title,
     image,
     readyInMinutes,
@@ -44,6 +45,7 @@ const convertRecipe = (recipe) => {
 
   const newRecipe = {
     title: title,
+    recipeId: id,
     image: image,
     time: convertTime(readyInMinutes),
     servings: servings,

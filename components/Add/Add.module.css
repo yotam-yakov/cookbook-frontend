@@ -149,13 +149,3 @@
   transform: scale(0.95);
   opacity: 0.9;
 }
-
-::-webkit-scrollbar {
-  width: 0;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
