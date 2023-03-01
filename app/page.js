@@ -7,12 +7,14 @@ import { Fragment } from 'react';
 
 export default function HomePage() {
   const recipe = useRecipeStorage((state) => state.recipe);
-  const searchResults = useRecipeStorage((state) => state.recipes);
+  const searchResults = useRecipeStorage((state) => state.searchResults);
 
   return (
     <Fragment>
       <Search />
-      {searchResults.length !== 0 && <Recipes recipes={searchResults} />}
+      {searchResults && searchResults.length !== 0 && (
+        <Recipes recipes={searchResults} />
+      )}
       {Object.keys(recipe).length !== 0 && <Recipe {...recipe} />}
     </Fragment>
   );

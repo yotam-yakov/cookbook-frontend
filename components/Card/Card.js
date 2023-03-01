@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { addRecipe } from '../../api/cookbook/api';
+import { addRecipe, deleteRecipe } from '../../api/cookbook/api';
 import useRecipeStorage from '../../state/useRecipeStorage';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Card.module.css';
@@ -10,7 +10,7 @@ import styles from './Card.module.css';
 export default function Card({ recipe }) {
   const [isActive, setIsActive] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const setRecipe = useRecipeStorage((State) => State.setRecipe);
+  const setRecipe = useRecipeStorage((state) => state.setRecipe);
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
   const router = useRouter();
   const jwt = localStorage.getItem('jwt');
@@ -28,6 +28,18 @@ export default function Card({ recipe }) {
     } else {
       router.push('/signin');
     }
+  };
+
+  const removeRecipe = (evt) => {
+    evt.stopPropagation();
+
+    setIsLoading(true);
+    deleteRecipe(recipe.recipeId, jwt)
+      .then(() => {
+        setIsActive(false);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
   };
 
   const openRecipe = () => {
@@ -85,7 +97,7 @@ export default function Card({ recipe }) {
       />
       <button
         type='button'
-        onClick={saveRecipe}
+        onClick={isActive ? removeRecipe : saveRecipe}
         className={`${styles.button} ${isActive && styles.buttonActive}`}
       >
         <Image

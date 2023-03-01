@@ -16,7 +16,7 @@ export default function Search() {
       handleSwitches: state.handleSwitches,
     })
   );
-  const setRecipes = useRecipeStorage((state) => state.setRecipes);
+  const setSearchResults = useRecipeStorage((state) => state.setSearchResults);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -37,7 +37,7 @@ export default function Search() {
 
     submitSearch(search)
       .then((recipes) => {
-        setRecipes(recipes);
+        setSearchResults(recipes);
       })
       .catch((err) => console.log(err));
   };

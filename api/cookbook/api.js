@@ -25,12 +25,36 @@ const signUp = ({ email, name, password }) => {
 
 const addRecipe = (recipe, jwt) => {
   return api
-    .post('/recipes', recipe, {
+    .post(
+      '/recipes',
+      { ...recipe },
+      {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+        },
+      }
+    )
+    .then((res) => console.log(res));
+};
+
+const deleteRecipe = (recipeId, jwt) => {
+  return api
+    .delete(`recipes/${recipeId}`, {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
     })
-    .then((res) => console.log(res));
+    .then((res) => console.log(res.data));
 };
 
-export { signIn, signUp, addRecipe };
+const getSavedRecipes = (jwt) => {
+  return api
+    .get('/recipes', {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    .then((res) => console.log(res.data));
+};
+
+export { signIn, signUp, addRecipe, deleteRecipe, getSavedRecipes };

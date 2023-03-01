@@ -5,9 +5,19 @@ import Add from '../components/Add/Add';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import useUserStorage from '../state/useUserStorage';
+import { useEffect } from 'react';
 
 export default function RootLayout({ children }) {
-  const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
+  const { isLoggedIn, logIn } = useUserStorage((state) => ({
+    isLoggedIn: state.isLoggedIn,
+    logIn: state.logIn,
+  }));
+
+  useEffect(() => {
+    if (localStorage.getItem('jwt')) {
+      logIn();
+    }
+  }, []);
 
   return (
     <html>
