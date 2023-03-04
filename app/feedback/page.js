@@ -4,7 +4,9 @@ import styles from './Feedback.module.css';
 export default function Feedback() {
   const feedback = {
     title: 'Tell us your thoughts',
-    submit: 'Send',
+    submit: {
+      text: 'Send',
+    },
     inputs: [
       {
         id: 'email',

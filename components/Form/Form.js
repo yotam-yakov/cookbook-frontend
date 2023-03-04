@@ -15,11 +15,7 @@ export default function Form({ title, submit, inputs, redirect, children }) {
           {submit.text}
         </button>
         {redirect && (
-          <Link
-            href={redirect.url}
-            prefetch={false}
-            className={styles.redirect}
-          >
+          <Link href={redirect.url} className={styles.redirect}>
             {redirect.text}
           </Link>
         )}

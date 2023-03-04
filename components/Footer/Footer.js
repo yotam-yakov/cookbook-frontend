@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className={styles.footer}>
       Cookbook was created by Yotam Yakov
-      <Link href='/feedback' prefetch={false} className={styles.link}>
+      <Link href='/feedback' className={styles.link}>
         Send Feedback
       </Link>
     </div>

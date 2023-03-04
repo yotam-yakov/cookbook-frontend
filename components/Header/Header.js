@@ -31,14 +31,12 @@ export default function Header() {
           <>
             <Link
               href='/myrecipes'
-              prefetch={false}
               className={`${styles.link} ${styles.click}`}
             >
               My Recipes
             </Link>
             <Link
               href='/savedrecipes'
-              prefetch={false}
               className={`${styles.link} ${styles.click}`}
             >
               Saved Recipes
