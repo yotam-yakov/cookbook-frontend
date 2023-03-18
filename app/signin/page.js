@@ -4,7 +4,7 @@ import Form from '../../components/Form/Form';
 import { signIn } from '../../api/cookbook/api';
 import useValuesStorage from '../../state/useValuesStorage';
 import useUserStorage from '../../state/useUserStorage';
-import cookies from 'cookie-cutter';
+import cookies from 'js-cookie';
 
 export default function SignIn() {
   const values = useValuesStorage((state) => state.values);

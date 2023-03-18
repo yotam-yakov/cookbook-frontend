@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Header.module.css';
-import cookies from 'cookie-cutter';
+import cookies from 'js-cookie';
 
 export default function Header() {
   const { isLoggedIn, logOut } = useUserStorage((state) => ({
@@ -13,7 +13,7 @@ export default function Header() {
   const signOut = () => {
     logOut();
     localStorage.removeItem('jwt');
-    cookies.set('jwt', 'old', { expires: new Date(0) });
+    cookies.remove('jwt');
     window.location.reload();
   };
 

@@ -1,11 +1,21 @@
 import { NextResponse } from 'next/server';
+import { Headers } from 'next/headers';
 
 export function middleware(req) {
-  console.log(req.cookies.get('jwt'));
   const urls = ['/myrecipes', '/savedrecipes'];
+  const jwt = req.cookies.get('jwt');
 
-  if (urls.includes(req.nextUrl.pathname) && !req.cookies.get('jwt')) {
-    return NextResponse.rewrite(new URL('/signin', req.url));
+  if (urls.includes(req.nextUrl.pathname)) {
+    if (!jwt) {
+      return NextResponse.rewrite(new URL('/signin', req.url));
+    }
+    const headers = Headers(req.headers);
+    headers.set('authorization', `Bearer ${jwt}`);
+    return NextResponse.next({
+      request: {
+        headers: headers,
+      },
+    });
   }
 }
 
