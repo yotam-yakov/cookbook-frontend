@@ -19,7 +19,7 @@ export default function Header() {
 
   return (
     <div className={styles.header}>
-      <Link className={styles.logo} href='/' prefetch={false}>
+      <Link className={styles.logo} href='/'>
         <Image
           src='/cookbook.png'
           alt='Cookbook Logo'

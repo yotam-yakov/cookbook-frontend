@@ -38,8 +38,9 @@ export default function Search() {
     submitSearch(search)
       .then((recipes) => {
         setSearchResults(recipes);
+        setIsFilterOpen(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   return (

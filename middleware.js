@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { Headers } from 'next/headers';
 
 export function middleware(req) {
   const urls = ['/myrecipes', '/savedrecipes'];
@@ -9,13 +8,7 @@ export function middleware(req) {
     if (!jwt) {
       return NextResponse.rewrite(new URL('/signin', req.url));
     }
-    const headers = Headers(req.headers);
-    headers.set('authorization', `Bearer ${jwt}`);
-    return NextResponse.next({
-      request: {
-        headers: headers,
-      },
-    });
+    return NextResponse.next();
   }
 }
 

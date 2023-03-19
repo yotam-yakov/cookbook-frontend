@@ -14,7 +14,6 @@ async function getRecipes() {
 
 export default function SavedRecipes() {
   const recipes = use(getRecipes());
-  console.log(recipes);
 
   return <Recipes recipes={recipes} />;
 }
