@@ -72,14 +72,14 @@ export default function Card({ recipe }) {
         alt='Dairy icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${recipe.dairy && styles.dietActive}`}
+        className={`${styles.diet} ${recipe.dairyFree && styles.dietActive}`}
       />
       <Image
         src='/gluten.svg'
         alt='Gluten icon'
         width={32}
         height={32}
-        className={`${styles.diet} ${recipe.gluten && styles.dietActive}`}
+        className={`${styles.diet} ${recipe.glutenFree && styles.dietActive}`}
       />
       <Image
         src='/vegan.svg'

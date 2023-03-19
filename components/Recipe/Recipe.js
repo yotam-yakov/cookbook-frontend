@@ -52,7 +52,9 @@ export default function Recipe() {
           </p>
         </div>
         <div className={styles.diets}>
-          <p className={`${styles.diet} ${!recipe.dairy && styles.dietOff}`}>
+          <p
+            className={`${styles.diet} ${!recipe.dairyFree && styles.dietOff}`}
+          >
             <Image
               src='/dairy.svg'
               alt={`${!recipe.dairy ? 'disabled ' : ''}dairy free icon`}
@@ -61,7 +63,9 @@ export default function Recipe() {
             />
             Dairy Free
           </p>
-          <p className={`${styles.diet} ${!recipe.gluten && styles.dietOff}`}>
+          <p
+            className={`${styles.diet} ${!recipe.glutenFree && styles.dietOff}`}
+          >
             <Image
               src='/gluten.svg'
               alt={`${!recipe.gluten ? 'disabled ' : ''}gluten free icon`}

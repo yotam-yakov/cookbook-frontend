@@ -55,8 +55,7 @@ const getSavedRecipes = (jwt) => {
       },
     })
     .then((res) => {
-      console.log(res.data);
-      return res;
+      return res.data;
     });
 };
 

@@ -8,13 +8,13 @@ import { use } from 'react';
 async function getRecipes() {
   const headersInst = headers();
   const jwt = headersInst.get('cookie').split('=')[1];
-  console.log(jwt);
   const recipes = await getSavedRecipes(jwt);
   return recipes;
 }
 
 export default function SavedRecipes() {
   const recipes = use(getRecipes());
+  console.log(recipes);
 
   return <Recipes recipes={recipes} />;
 }

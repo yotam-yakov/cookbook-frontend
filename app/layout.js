@@ -4,7 +4,9 @@ import './globals.css';
 import Add from '../components/Add/Add';
 import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
+import Recipe from '../components/Recipe/Recipe';
 import useUserStorage from '../state/useUserStorage';
+import useRecipeStorage from '../state/useRecipeStorage';
 import { useEffect } from 'react';
 
 export default function RootLayout({ children }) {
@@ -12,6 +14,7 @@ export default function RootLayout({ children }) {
     isLoggedIn: state.isLoggedIn,
     logIn: state.logIn,
   }));
+  const recipe = useRecipeStorage((state) => state.recipe);
 
   useEffect(() => {
     if (localStorage.getItem('jwt')) {
@@ -31,6 +34,7 @@ export default function RootLayout({ children }) {
         <Header />
         {children}
         {isLoggedIn && <Add />}
+        {Object.keys(recipe).length !== 0 && <Recipe {...recipe} />}
         <Footer />
       </body>
     </html>
