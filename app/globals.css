@@ -17,11 +17,12 @@
 }
 
 body {
-  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
   background-color: var(--color-base);
-  padding: 0;
-  padding: 0 1rem;
+  padding: 1rem;
   width: 100%;
+  min-height: 100vh;
   font-family: var(--font-main), Helvetica Neue, sans-serif;
 }
 

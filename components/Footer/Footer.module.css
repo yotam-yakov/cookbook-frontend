@@ -1,9 +1,9 @@
 .footer {
-  margin: 2rem auto;
-  font-family: var(--font-second);
-  color: grey;
   display: flex;
   justify-content: space-between;
+  margin: auto 0 0;
+  color: grey;
+  font-family: var(--font-second);
 }
 
 .link {

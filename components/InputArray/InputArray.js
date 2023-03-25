@@ -3,11 +3,13 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import styles from './InputArray.module.css';
 
-export default function InputArray({ element, title }) {
+export default function InputArray({ element, title, max }) {
   const [inputs, setInputs] = useState(3);
 
   const addInput = () => {
-    setInputs(inputs + 1);
+    if (inputs < max) {
+      setInputs(inputs + 1);
+    }
   };
 
   const removeInput = () => {
@@ -37,7 +39,13 @@ export default function InputArray({ element, title }) {
             height={24}
           />
         </button>
-        <button type='button' onClick={addInput} className={styles.addButton}>
+        <button
+          type='button'
+          onClick={addInput}
+          className={`${styles.addButton} ${
+            inputs === max && styles.addButtonDisabled
+          }`}
+        >
           <Image
             src='/plus.svg'
             alt='add input slot button'

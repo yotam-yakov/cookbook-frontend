@@ -6,9 +6,18 @@ import Popup from '../Popup/Popup';
 import InputArray from '../InputArray/InputArray';
 import Switch from '../Switch/Switch';
 import Input from '../Input/Input';
+import useValuesStorage from '../../state/useValuesStorage';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { values, switches, handleChange, handleSwitches } = useValuesStorage(
+    (state) => ({
+      values: state.values,
+      switches: state.switches,
+      handleChange: state.handleChange,
+      handleSwitches: state.handleSwitches,
+    })
+  );
 
   const inputs = [
     {
@@ -51,12 +60,16 @@ export default function Add() {
         <input
           type='text'
           id={`ingredient${index + 1}-name`}
+          name={`ingredient${index + 1}-name`}
+          onChange={handleChange}
           className={styles.ingredientName}
           placeholder='Name'
         />
         <input
           type='number'
           id={`ingredient${index + 1}-amount`}
+          name={`ingredient${index + 1}-amount`}
+          onChange={handleChange}
           className={styles.ingredientAmount}
           placeholder='#'
         />
@@ -64,6 +77,7 @@ export default function Add() {
           defaultValue=''
           id={`ingredient${index + 1}-measure`}
           name={`ingredient${index + 1}-measure`}
+          onChange={handleChange}
           className={styles.ingredientMeasure}
         >
           <option value='' hidden>
@@ -91,10 +105,48 @@ export default function Add() {
         <textarea
           key={index}
           id={`step${index + 1}`}
+          name={`step${index + 1}`}
+          onChange={handleChange}
           placeholder={`Step ${index + 1}`}
           className={styles.stepInput}
         />
       </div>
+    );
+  };
+
+  const submitAdd = (evt) => {
+    evt.preventDefault();
+
+    const steps = [];
+    for (let i = 0; i < 30; i++) {
+      if (values[`step${i + 1}`]) {
+        steps.push(values[`step${i + 1}`]);
+      }
+    }
+
+    const ingredients = [];
+    for (let i = 0; i < 20; i++) {
+      if (values[`ingredient${i + 1}-name`]) {
+        ingredients.push({
+          name: values[`ingredient${i + 1}-name`],
+          amount: values[`ingredient${i + 1}-amount`],
+          measure: values[`ingredient${i + 1}-measure`],
+        });
+      }
+    }
+
+    console.log(
+      values.title,
+      values.time,
+      values.image,
+      values.servings,
+      switches.isDairy || false,
+      switches.isGluten || false,
+      switches.isVegan || false,
+      switches.isVegetarian || false,
+      ingredients,
+      steps,
+      'myRecipe'
     );
   };
 
@@ -105,13 +157,13 @@ export default function Add() {
       </button>
       {isPopupOpen && (
         <Popup onClose={() => setIsPopupOpen(false)}>
-          <form className={styles.popup}>
+          <form onSubmit={submitAdd} className={styles.popup}>
             {inputs.map((input, index) => {
               return <Input input={input} key={index} />;
             })}
             <h2 className={styles.title}>Add Your Own Recipe</h2>
             <div className={styles.diets}>
-              <Switch id='isDairy'>
+              <Switch id='isDairy' onChange={handleSwitches}>
                 <Image
                   src='/dairy.svg'
                   alt='dairy icon'
@@ -121,7 +173,7 @@ export default function Add() {
                 />
                 Dairy Free
               </Switch>
-              <Switch id='isGluten'>
+              <Switch id='isGluten' onChange={handleSwitches}>
                 <Image
                   src='/gluten.svg'
                   alt='gluten icon'
@@ -131,7 +183,7 @@ export default function Add() {
                 />
                 Gluten Free
               </Switch>
-              <Switch id='isVegan'>
+              <Switch id='isVegan' onChange={handleSwitches}>
                 <Image
                   src='/vegan.svg'
                   alt='vegan icon'
@@ -141,7 +193,7 @@ export default function Add() {
                 />
                 Vegan
               </Switch>
-              <Switch id='isVegetarian'>
+              <Switch id='isVegetarian' onChange={handleSwitches}>
                 <Image
                   src='/vegetarian.svg'
                   alt='vegetarian icon'
@@ -152,9 +204,13 @@ export default function Add() {
                 Vegetarian
               </Switch>
             </div>
-            <InputArray element={createIngredient} title='Ingredients' />
-            <InputArray element={createStep} title='Steps' />
-            <button type='button' className={styles.saveButton}>
+            <InputArray
+              element={createIngredient}
+              title='Ingredients'
+              max={20}
+            />
+            <InputArray element={createStep} title='Steps' max={30} />
+            <button type='submit' className={styles.saveButton}>
               <Image src='/chef.svg' alt="chef's hat" width={24} height={24} />
               Done!
             </button>
