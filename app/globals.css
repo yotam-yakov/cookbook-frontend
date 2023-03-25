@@ -19,14 +19,15 @@
 body {
   display: flex;
   flex-direction: column;
+  margin: 0;
   background-color: var(--color-base);
   padding: 1rem;
   width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   font-family: var(--font-main), Helvetica Neue, sans-serif;
 }
 
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0;
 }
 

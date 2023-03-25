@@ -1,8 +1,6 @@
 import Recipes from '../../../components/Recipes/Recipes';
 import { getSavedRecipes } from '../../../api/cookbook/api';
 import { headers } from 'next/headers';
-import cookies from 'js-cookie';
-import data from '../../../temp/recipes-temp';
 import { use } from 'react';
 
 async function getRecipes() {
