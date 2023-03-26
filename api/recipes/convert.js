@@ -61,4 +61,4 @@ const convertRecipe = (recipe) => {
   return newRecipe;
 };
 
-export default convertRecipe;
+export default { convertRecipe, convertTime };

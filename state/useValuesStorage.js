@@ -18,6 +18,12 @@ const useValuesStorage = create((set) => ({
     set((state) => ({
       switches: { ...state.switches, [evt.target.name]: evt.target.checked },
     })),
+  clearAll: () =>
+    set(() => ({
+      values: {},
+      switches: {},
+      errors: {},
+    })),
 }));
 
 export default useValuesStorage;

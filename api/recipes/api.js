@@ -1,5 +1,5 @@
 import axios from 'axios';
-import convertRecipe from './convert';
+import { convertRecipe } from './convert';
 
 const api = axios.create({
   baseURL: 'https://api.spoonacular.com/recipes',

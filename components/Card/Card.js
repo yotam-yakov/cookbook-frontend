@@ -21,6 +21,7 @@ export default function Card({ recipe }) {
       setIsLoading(true);
       addRecipe(recipe, jwt)
         .then(() => {
+          console.log(recipe);
           setIsActive(true);
         })
         .catch((err) => console.error(err))

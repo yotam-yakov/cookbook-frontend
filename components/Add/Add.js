@@ -1,23 +1,25 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './Add.module.css';
 import Popup from '../Popup/Popup';
 import InputArray from '../InputArray/InputArray';
 import Switch from '../Switch/Switch';
 import Input from '../Input/Input';
 import useValuesStorage from '../../state/useValuesStorage';
+import { addRecipe } from '../../api/cookbook/api';
+import styles from './Add.module.css';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const { values, switches, handleChange, handleSwitches } = useValuesStorage(
-    (state) => ({
+  const [isLoading, setIsLoading] = useState(false);
+  const { values, switches, handleChange, handleSwitches, clearAll } =
+    useValuesStorage((state) => ({
       values: state.values,
       switches: state.switches,
       handleChange: state.handleChange,
       handleSwitches: state.handleSwitches,
-    })
-  );
+      clearAll: state.clearAll,
+    }));
 
   const inputs = [
     {
@@ -117,13 +119,14 @@ export default function Add() {
   const submitAdd = (evt) => {
     evt.preventDefault();
 
+    setIsLoading(true);
+
     const steps = [];
     for (let i = 0; i < 30; i++) {
       if (values[`step${i + 1}`]) {
         steps.push(values[`step${i + 1}`]);
       }
     }
-
     const ingredients = [];
     for (let i = 0; i < 20; i++) {
       if (values[`ingredient${i + 1}-name`]) {
@@ -135,19 +138,29 @@ export default function Add() {
       }
     }
 
-    console.log(
-      values.title,
-      values.time,
-      values.image,
-      values.servings,
-      switches.isDairy || false,
-      switches.isGluten || false,
-      switches.isVegan || false,
-      switches.isVegetarian || false,
-      ingredients,
-      steps,
-      'myRecipe'
-    );
+    addRecipe(
+      {
+        title: values.title,
+        recipeId: 0,
+        time: values.time,
+        image: values.image,
+        servings: values.servings,
+        source: 'myRecipe',
+        dairyFree: switches.isDairy || false,
+        glutenFree: switches.isGluten || false,
+        vegan: switches.isVegan || false,
+        vegetarian: switches.isVegetarian || false,
+        ingredients: ingredients,
+        instructions: steps,
+      },
+      localStorage.getItem('jwt')
+    )
+      .then(() => {
+        setIsPopupOpen(false);
+        clearAll();
+      })
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -210,9 +223,14 @@ export default function Add() {
               max={20}
             />
             <InputArray element={createStep} title='Steps' max={30} />
-            <button type='submit' className={styles.saveButton}>
+            <button
+              type='submit'
+              className={`${styles.saveButton} ${
+                isLoading && styles.saveButtonLoading
+              }`}
+            >
               <Image src='/chef.svg' alt="chef's hat" width={24} height={24} />
-              Done!
+              {isLoading ? 'Saving...' : 'Done!'}
             </button>
           </form>
         </Popup>
