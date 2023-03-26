@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 
-export function middleware(req) {
+export function middleware(request) {
   const urls = ['/myrecipes', '/savedrecipes'];
-  const jwt = req.cookies.get('jwt');
+  const jwt = request.cookies.get('jwt');
 
-  if (urls.includes(req.nextUrl.pathname)) {
+  if (urls.includes(request.nextUrl.pathname)) {
     if (!jwt) {
-      return NextResponse.rewrite(new URL('/signin', req.url));
+      return NextResponse.rewrite(new URL('/signin', request.url));
     }
     return NextResponse.next();
   }

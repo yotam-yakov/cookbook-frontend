@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://cook-book-api-dev.vercel.app/',
+  baseURL: process.env.API_URL,
 });
 
 const signIn = ({ email, password }) => {
