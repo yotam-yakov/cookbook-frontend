@@ -8,6 +8,8 @@ import Recipe from '../components/Recipe/Recipe';
 import useUserStorage from '../state/useUserStorage';
 import useRecipeStorage from '../state/useRecipeStorage';
 import { useEffect } from 'react';
+import Cookies from 'js-cookie';
+
 export default function RootLayout({ children }) {
   const { isLoggedIn, logIn } = useUserStorage((state) => ({
     isLoggedIn: state.isLoggedIn,
@@ -16,7 +18,7 @@ export default function RootLayout({ children }) {
   const recipe = useRecipeStorage((state) => state.recipe);
 
   useEffect(() => {
-    if (localStorage.getItem('jwt')) {
+    if (Cookies.get('jwt')) {
       logIn();
     }
   }, []);

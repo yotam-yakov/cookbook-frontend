@@ -7,6 +7,7 @@ import Input from '../Input/Input';
 import useValuesStorage from '../../state/useValuesStorage';
 import { addRecipe } from '../../api/cookbook/api';
 import styles from './Add.module.css';
+import Cookies from 'js-cookie';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -158,7 +159,7 @@ export default function Add() {
         ingredients: ingredients,
         instructions: steps,
       },
-      localStorage.getItem('jwt')
+      Cookies.get('jwt')
     )
       .then(() => {
         setIsPopupOpen(false);

@@ -20,7 +20,6 @@ export default function SignIn() {
     })
       .then((token) => {
         Cookies.set('jwt', token);
-        localStorage.setItem('jwt', token);
         router.push('/');
         logIn();
       })
