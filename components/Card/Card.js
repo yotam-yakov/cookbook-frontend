@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { addRecipe, deleteRecipe } from '../../api/cookbook/api';
 import useRecipeStorage from '../../state/useRecipeStorage';
@@ -14,6 +14,7 @@ export default function Card({ recipe, saved }) {
   const setRecipe = useRecipeStorage((state) => state.setRecipe);
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
   const router = useRouter();
+  const pathname = usePathname();
   const jwt = Cookies.get('jwt');
 
   const saveRecipe = (evt) => {
@@ -23,6 +24,7 @@ export default function Card({ recipe, saved }) {
       addRecipe(recipe, jwt)
         .then(() => {
           setIsActive(true);
+          router.refresh();
         })
         .catch((err) => console.error(err))
         .finally(() => setIsLoading(false));
@@ -39,6 +41,9 @@ export default function Card({ recipe, saved }) {
     deleteRecipe(cardId, jwt)
       .then(() => {
         setIsActive(false);
+        if (pathname === 'savedrecipes' || 'myrecipes') {
+          router.refresh();
+        }
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));

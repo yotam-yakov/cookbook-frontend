@@ -8,6 +8,7 @@ export const metadata = {
 };
 
 async function getRecipes() {
+  console.log('data fetching');
   const cookieStore = cookies();
   const jwt = cookieStore.get('jwt').value;
   const recipes = await getSavedRecipes(jwt);
@@ -16,6 +17,7 @@ async function getRecipes() {
 
 export default function SavedRecipes() {
   const recipes = use(getRecipes());
+  console.log(recipes);
 
   return <Recipes recipes={recipes} saved />;
 }

@@ -3,12 +3,14 @@ import Link from 'next/link';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Header.module.css';
 import cookies from 'js-cookie';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const { isLoggedIn, logOut } = useUserStorage((state) => ({
     isLoggedIn: state.isLoggedIn,
     logOut: state.logOut,
   }));
+  const pathname = usePathname();
 
   const signOut = () => {
     logOut();
@@ -34,13 +36,25 @@ export default function Header() {
           <>
             <Link
               href='/myrecipes'
-              className={`${styles.link} ${styles.click}`}
+              onClick={
+                pathname === '/myrecipes' ? (evt) => evt.preventDefault() : ''
+              }
+              className={`${styles.link} ${styles.click} ${
+                pathname === '/myrecipes' && styles.clickDisabled
+              }`}
             >
               My Recipes
             </Link>
             <Link
               href='/savedrecipes'
-              className={`${styles.link} ${styles.click}`}
+              onClick={
+                pathname === '/savedrecipes'
+                  ? (evt) => evt.preventDefault()
+                  : ''
+              }
+              className={`${styles.link} ${styles.click} ${
+                pathname === '/savedrecipes' && styles.clickDisabled
+              }`}
             >
               Saved Recipes
             </Link>
