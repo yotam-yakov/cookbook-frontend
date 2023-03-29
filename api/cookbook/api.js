@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: 'http://localhost:3001',
 });
 
 const signIn = ({ email, password }) => {
@@ -49,7 +49,7 @@ const deleteRecipe = (recipeId, jwt) => {
 
 const getSavedRecipes = (jwt) => {
   return api
-    .get('/recipes', {
+    .get('/recipes/saved', {
       headers: {
         Authorization: `Bearer ${jwt}`,
       },
@@ -59,4 +59,23 @@ const getSavedRecipes = (jwt) => {
     });
 };
 
-export { signIn, signUp, addRecipe, deleteRecipe, getSavedRecipes };
+const getMyRecipes = (jwt) => {
+  return api
+    .get('/recipes/my', {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    .then((res) => {
+      return res.data;
+    });
+};
+
+export {
+  signIn,
+  signUp,
+  addRecipe,
+  deleteRecipe,
+  getSavedRecipes,
+  getMyRecipes,
+};

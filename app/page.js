@@ -10,7 +10,7 @@ export default function HomePage() {
   return (
     <Fragment>
       <Search />
-      {searchResults && <Recipes recipes={searchResults} />}
+      {searchResults.length !== 0 && <Recipes recipes={searchResults} />}
     </Fragment>
   );
 }

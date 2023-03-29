@@ -2,12 +2,12 @@ import Card from '../Card/Card';
 import Image from 'next/image';
 import styles from './Recipes.module.css';
 
-export default function Recipes({ recipes }) {
+export default function Recipes({ recipes, saved }) {
   return (
     <div className={styles.recipes}>
       {recipes.length > 0 ? (
         recipes.map((recipe, index) => {
-          return <Card recipe={recipe} key={index} />;
+          return <Card recipe={recipe} saved={saved} key={index} />;
         })
       ) : (
         <div className={styles.notFound}>

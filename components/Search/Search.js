@@ -37,7 +37,11 @@ export default function Search() {
 
     submitSearch(search)
       .then((recipes) => {
-        setSearchResults(recipes);
+        if (recipes.length === 0) {
+          setSearchResults(['empty']);
+        } else {
+          setSearchResults(recipes);
+        }
         setIsFilterOpen(false);
       })
       .catch((err) => console.error(err));

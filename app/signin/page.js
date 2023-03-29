@@ -4,7 +4,7 @@ import Form from '../../components/Form/Form';
 import { signIn } from '../../api/cookbook/api';
 import useValuesStorage from '../../state/useValuesStorage';
 import useUserStorage from '../../state/useUserStorage';
-import cookies from 'js-cookie';
+import Cookies from 'js-cookie';
 
 export default function SignIn() {
   const values = useValuesStorage((state) => state.values);
@@ -19,7 +19,7 @@ export default function SignIn() {
       password: values.password,
     })
       .then((token) => {
-        cookies.set('jwt', token);
+        Cookies.set('jwt', token);
         localStorage.setItem('jwt', token);
         router.push('/');
         logIn();

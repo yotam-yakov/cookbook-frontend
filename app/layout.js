@@ -8,7 +8,6 @@ import Recipe from '../components/Recipe/Recipe';
 import useUserStorage from '../state/useUserStorage';
 import useRecipeStorage from '../state/useRecipeStorage';
 import { useEffect } from 'react';
-
 export default function RootLayout({ children }) {
   const { isLoggedIn, logIn } = useUserStorage((state) => ({
     isLoggedIn: state.isLoggedIn,

@@ -35,6 +35,9 @@ export default function Add() {
       type: 'number',
       placeholder: 'How much time does it take?',
       style: styles.input,
+      props: {
+        onWheel: (evt) => evt.target.blur(),
+      },
     },
     {
       id: 'image',
@@ -49,6 +52,9 @@ export default function Add() {
       type: 'number',
       placeholder: 'How many dishes?',
       style: styles.input,
+      props: {
+        onWheel: (evt) => evt.target.blur(),
+      },
     },
   ];
 

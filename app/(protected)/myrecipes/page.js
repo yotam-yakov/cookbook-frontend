@@ -1,5 +1,5 @@
 import Recipes from '../../../components/Recipes/Recipes';
-import { getSavedRecipes } from '../../../api/cookbook/api';
+import { getMyRecipes } from '../../../api/cookbook/api';
 import { cookies } from 'next/headers';
 import { use } from 'react';
 
@@ -10,12 +10,12 @@ export const metadata = {
 async function getRecipes() {
   const cookieStore = cookies();
   const jwt = cookieStore.get('jwt').value;
-  const recipes = await getSavedRecipes(jwt);
+  const recipes = await getMyRecipes(jwt);
   return recipes;
 }
 
 export default function MyRecipes() {
   const recipes = use(getRecipes());
 
-  return <Recipes recipes={recipes} />;
+  return <Recipes recipes={recipes} saved />;
 }

@@ -6,14 +6,15 @@ import { addRecipe, deleteRecipe } from '../../api/cookbook/api';
 import useRecipeStorage from '../../state/useRecipeStorage';
 import useUserStorage from '../../state/useUserStorage';
 import styles from './Card.module.css';
+import Cookies from 'js-cookie';
 
-export default function Card({ recipe }) {
-  const [isActive, setIsActive] = useState(false);
+export default function Card({ recipe, saved }) {
+  const [isActive, setIsActive] = useState(saved);
   const [isLoading, setIsLoading] = useState(false);
   const setRecipe = useRecipeStorage((state) => state.setRecipe);
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
   const router = useRouter();
-  const jwt = localStorage.getItem('jwt');
+  const jwt = Cookies.get('jwt');
 
   const saveRecipe = (evt) => {
     evt.stopPropagation();
@@ -21,7 +22,6 @@ export default function Card({ recipe }) {
       setIsLoading(true);
       addRecipe(recipe, jwt)
         .then(() => {
-          console.log(recipe);
           setIsActive(true);
         })
         .catch((err) => console.error(err))
@@ -33,9 +33,10 @@ export default function Card({ recipe }) {
 
   const removeRecipe = (evt) => {
     evt.stopPropagation();
+    const cardId = recipe.recipeId === 0 ? recipe._id : recipe.recipeId;
 
     setIsLoading(true);
-    deleteRecipe(recipe.recipeId, jwt)
+    deleteRecipe(cardId, jwt)
       .then(() => {
         setIsActive(false);
       })
@@ -108,7 +109,7 @@ export default function Card({ recipe }) {
           height={32}
           className={`${styles.plus} ${isLoading && styles.loading}`}
         />
-        {!isLoggedIn && <p className={styles.tooltip}>Log in to save</p>}
+        {/* {isLoggedIn && <span className={styles.tooltip}>Log in to save</span>} */}
       </button>
     </div>
   );
