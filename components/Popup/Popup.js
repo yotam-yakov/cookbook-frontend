@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import styles from './Popup.module.css';

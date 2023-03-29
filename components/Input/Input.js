@@ -1,4 +1,3 @@
-'use client';
 import { Fragment } from 'react';
 import useValuesStorage from '../../state/useValuesStorage';
 import styles from './Input.module.css';

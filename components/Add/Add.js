@@ -1,5 +1,4 @@
-'use client';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Popup from '../Popup/Popup';
 import InputArray from '../InputArray/InputArray';
@@ -12,14 +11,14 @@ import styles from './Add.module.css';
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { values, switches, handleChange, handleSwitches, clearAll } =
-    useValuesStorage((state) => ({
+  const { values, switches, handleChange, clearAll } = useValuesStorage(
+    (state) => ({
       values: state.values,
       switches: state.switches,
       handleChange: state.handleChange,
-      handleSwitches: state.handleSwitches,
       clearAll: state.clearAll,
-    }));
+    })
+  );
 
   const inputs = [
     {
@@ -182,7 +181,7 @@ export default function Add() {
             })}
             <h2 className={styles.title}>Add Your Own Recipe</h2>
             <div className={styles.diets}>
-              <Switch id='isDairy' onChange={handleSwitches}>
+              <Switch id='isDairy'>
                 <Image
                   src='/dairy.svg'
                   alt='dairy icon'
@@ -192,7 +191,7 @@ export default function Add() {
                 />
                 Dairy Free
               </Switch>
-              <Switch id='isGluten' onChange={handleSwitches}>
+              <Switch id='isGluten'>
                 <Image
                   src='/gluten.svg'
                   alt='gluten icon'
@@ -202,7 +201,7 @@ export default function Add() {
                 />
                 Gluten Free
               </Switch>
-              <Switch id='isVegan' onChange={handleSwitches}>
+              <Switch id='isVegan'>
                 <Image
                   src='/vegan.svg'
                   alt='vegan icon'
@@ -212,7 +211,7 @@ export default function Add() {
                 />
                 Vegan
               </Switch>
-              <Switch id='isVegetarian' onChange={handleSwitches}>
+              <Switch id='isVegetarian'>
                 <Image
                   src='/vegetarian.svg'
                   alt='vegetarian icon'
