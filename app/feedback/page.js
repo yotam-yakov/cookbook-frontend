@@ -1,9 +1,6 @@
+'use client';
 import Form from '../../components/Form/Form';
 import styles from './Feedback.module.css';
-
-export const metadata = {
-  title: 'Send Feedback',
-};
 
 export default function Feedback() {
   const feedback = {
