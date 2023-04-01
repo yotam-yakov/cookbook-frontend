@@ -14,7 +14,6 @@ export default function Header() {
 
   const signOut = () => {
     logOut();
-    localStorage.removeItem('jwt');
     cookies.remove('jwt');
     window.location.reload();
   };
