@@ -35,7 +35,7 @@ export default function SignIn() {
     inputs: [
       {
         id: 'email',
-        type: 'text',
+        type: 'email',
         placeholder: 'Email',
       },
       {

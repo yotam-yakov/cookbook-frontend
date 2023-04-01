@@ -27,7 +27,7 @@ export default function SignUp() {
     inputs: [
       {
         id: 'email',
-        type: 'text',
+        type: 'email',
         placeholder: 'Email',
       },
       {
