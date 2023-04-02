@@ -1,4 +1,4 @@
-import Recipes from '../../../components/Recipes/Recipes';
+import Recipes from '@/components/Recipes/Recipes';
 import { getSavedRecipes } from '../../../api/cookbook/api';
 import { cookies } from 'next/headers';
 import { use } from 'react';

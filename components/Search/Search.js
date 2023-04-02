@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import styles from './Search.module.css';
-import useValuesStorage from '../../state/useValuesStorage';
-import { submitSearch } from '../../api/recipes/api';
-import useRecipeStorage from '../../state/useRecipeStorage';
+import useValuesStorage from '@/state/useValuesStorage';
+import useRecipeStorage from '@/state/useRecipeStorage';
+import { submitSearch } from '@/api/recipes/api';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);

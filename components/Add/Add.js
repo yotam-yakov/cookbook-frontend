@@ -4,8 +4,8 @@ import Popup from '../Popup/Popup';
 import InputArray from '../InputArray/InputArray';
 import Switch from '../Switch/Switch';
 import Input from '../Input/Input';
-import useValuesStorage from '../../state/useValuesStorage';
-import { addRecipe } from '../../api/cookbook/api';
+import useValuesStorage from '@/state/useValuesStorage';
+import { addRecipe } from '@/api/cookbook/api';
 import styles from './Add.module.css';
 import Cookies from 'js-cookie';
 

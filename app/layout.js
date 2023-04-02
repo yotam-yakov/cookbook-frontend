@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-head-element */
 'use client';
 import './globals.css';
-import Add from '../components/Add/Add';
-import Footer from '../components/Footer/Footer';
-import Header from '../components/Header/Header';
-import Recipe from '../components/Recipe/Recipe';
-import useUserStorage from '../state/useUserStorage';
-import useRecipeStorage from '../state/useRecipeStorage';
+import Add from '@/components/Add/Add';
+import Footer from '@/components/Footer/Footer';
+import Header from '@/components/Header/Header';
+import Recipe from '@/components/Recipe/Recipe';
+import useUserStorage from '@/state/useUserStorage';
+import useRecipeStorage from '@/state/useRecipeStorage';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
 

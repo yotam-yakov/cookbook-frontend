@@ -1,6 +1,6 @@
 'use client';
 import Form from '../../components/Form/Form';
-import useValuesStorage from '../../state/useValuesStorage';
+import useValuesStorage from '@/state/useValuesStorage';
 import { signUp } from '../../api/cookbook/api';
 import { useRouter } from 'next/navigation';
 

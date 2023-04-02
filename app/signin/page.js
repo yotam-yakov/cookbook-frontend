@@ -1,9 +1,9 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import Form from '../../components/Form/Form';
-import { signIn } from '../../api/cookbook/api';
-import useValuesStorage from '../../state/useValuesStorage';
-import useUserStorage from '../../state/useUserStorage';
+import Form from '@/components/Form/Form';
+import { signIn } from '@/api/cookbook/api';
+import useValuesStorage from '@/state/useValuesStorage';
+import useUserStorage from '@/state/useUserStorage';
 import Cookies from 'js-cookie';
 
 export default function SignIn() {

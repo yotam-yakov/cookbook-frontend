@@ -1,5 +1,5 @@
 import styles from './Switch.module.css';
-import useValuesStorage from '../../state/useValuesStorage';
+import useValuesStorage from '@/state/useValuesStorage';
 
 export default function Switch({ id, children }) {
   const handleSwitches = useValuesStorage((state) => state.handleSwitches);

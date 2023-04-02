@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import useValuesStorage from '../../state/useValuesStorage';
+import useValuesStorage from '@/state/useValuesStorage';
 import styles from './Input.module.css';
 
 export default function Input({ input }) {

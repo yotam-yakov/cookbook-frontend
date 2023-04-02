@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import useUserStorage from '../../state/useUserStorage';
+import useUserStorage from '@/state/useUserStorage';
 import styles from './Header.module.css';
 import cookies from 'js-cookie';
 import { usePathname } from 'next/navigation';

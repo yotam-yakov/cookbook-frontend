@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { addRecipe, deleteRecipe } from '../../api/cookbook/api';
-import useRecipeStorage from '../../state/useRecipeStorage';
-import useUserStorage from '../../state/useUserStorage';
+import useRecipeStorage from '@/state/useRecipeStorage';
+import useUserStorage from '@/state/useUserStorage';
 import styles from './Card.module.css';
 import Cookies from 'js-cookie';
 
