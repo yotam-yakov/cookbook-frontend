@@ -8,6 +8,7 @@ import useValuesStorage from '@/state/useValuesStorage';
 import { addRecipe } from '@/api/cookbook/api';
 import styles from './Add.module.css';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 export default function Add() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -20,6 +21,7 @@ export default function Add() {
       clearAll: state.clearAll,
     })
   );
+  const router = useRouter();
 
   const inputs = [
     {
@@ -166,7 +168,10 @@ export default function Add() {
         clearAll();
       })
       .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        router.refresh();
+      });
   };
 
   return (

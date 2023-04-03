@@ -56,6 +56,19 @@ export default function Card({ recipe, saved }) {
   return (
     <div onClick={openRecipe} className={styles.container}>
       <h2 className={styles.title}>{recipe.title}</h2>
+      <button
+        type='button'
+        onClick={isActive ? removeRecipe : saveRecipe}
+        className={`${styles.button} ${styles.edit}`}
+      >
+        <Image
+          src='/edit.svg'
+          alt='Add button'
+          width={32}
+          height={32}
+          className={`${styles.icon}`}
+        />
+      </button>
       <Image
         src={recipe.image}
         alt='Recipe image'
@@ -112,7 +125,7 @@ export default function Card({ recipe, saved }) {
           alt='Add button'
           width={32}
           height={32}
-          className={`${styles.plus} ${isLoading && styles.loading}`}
+          className={`${styles.icon} ${isLoading && styles.loading}`}
         />
         {/* {isLoggedIn && <span className={styles.tooltip}>Log in to save</span>} */}
       </button>
