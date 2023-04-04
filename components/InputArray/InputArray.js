@@ -2,8 +2,8 @@ import { Fragment, useState } from 'react';
 import Image from 'next/image';
 import styles from './InputArray.module.css';
 
-export default function InputArray({ element, title, max }) {
-  const [inputs, setInputs] = useState(3);
+export default function InputArray({ element, title, max, init }) {
+  const [inputs, setInputs] = useState(init || 3);
 
   const addInput = () => {
     if (inputs < max) {

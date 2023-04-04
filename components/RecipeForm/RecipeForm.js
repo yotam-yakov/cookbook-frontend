@@ -12,12 +12,13 @@ import styles from './RecipeForm.module.css';
 
 export default function RecipeForm({ onClose, recipe }) {
   const [isLoading, setIsLoading] = useState(false);
-  const { values, switches, handleChange, setValue, clearAll } =
+  const { values, switches, handleChange, setValue, setSwitch, clearAll } =
     useValuesStorage((state) => ({
       values: state.values,
       switches: state.switches,
       handleChange: state.handleChange,
       setValue: state.setValue,
+      setSwitch: state.setSwitch,
       clearAll: state.clearAll,
     }));
   const router = useRouter();
@@ -67,6 +68,7 @@ export default function RecipeForm({ onClose, recipe }) {
         className={styles.ingredient}
       >
         <input
+          value={values[`ingredient${index + 1}-name`] || ''}
           type='text'
           id={`ingredient${index + 1}-name`}
           name={`ingredient${index + 1}-name`}
@@ -75,6 +77,7 @@ export default function RecipeForm({ onClose, recipe }) {
           placeholder='Name'
         />
         <input
+          value={values[`ingredient${index + 1}-amount`] || ''}
           type='number'
           id={`ingredient${index + 1}-amount`}
           name={`ingredient${index + 1}-amount`}
@@ -83,7 +86,7 @@ export default function RecipeForm({ onClose, recipe }) {
           placeholder='#'
         />
         <select
-          defaultValue=''
+          value={values[`ingredient${index + 1}-measure`] || ''}
           id={`ingredient${index + 1}-measure`}
           name={`ingredient${index + 1}-measure`}
           onChange={handleChange}
@@ -112,6 +115,7 @@ export default function RecipeForm({ onClose, recipe }) {
     return (
       <div className={styles.step}>
         <textarea
+          value={values[`step${index + 1}`]}
           key={index}
           id={`step${index + 1}`}
           name={`step${index + 1}`}
@@ -145,25 +149,24 @@ export default function RecipeForm({ onClose, recipe }) {
       }
     }
 
-    addRecipe(
-      {
-        title: values.title,
-        recipeId: 0,
-        time: values.time,
-        image: values.image,
-        servings: values.servings,
-        source: 'myRecipe',
-        dairyFree: switches.isDairy || false,
-        glutenFree: switches.isGluten || false,
-        vegan: switches.isVegan || false,
-        vegetarian: switches.isVegetarian || false,
-        ingredients: ingredients,
-        instructions: steps,
-      },
-      Cookies.get('jwt')
-    )
+    const newRecipe = {
+      title: values.title,
+      recipeId: 0,
+      time: values.time,
+      image: values.image,
+      servings: values.servings,
+      source: 'myRecipe',
+      dairyFree: switches.dairyFree || false,
+      glutenFree: switches.glutenFree || false,
+      vegan: switches.vegan || false,
+      vegetarian: switches.vegetarian || false,
+      ingredients: ingredients,
+      instructions: steps,
+    };
+
+    addRecipe(newRecipe, Cookies.get('jwt'))
       .then(() => {
-        setIsPopupOpen(false);
+        onClose();
         clearAll();
       })
       .catch((err) => console.error(err))
@@ -175,10 +178,28 @@ export default function RecipeForm({ onClose, recipe }) {
 
   useEffect(() => {
     if (recipe) {
-      const recipeKeys = Object.keys(recipe);
-      console.log(recipeKeys);
-      recipeKeys.forEach((key) => {
+      ['title', 'image', 'time', 'servings'].forEach((key) => {
         setValue({ key, value: recipe[key] });
+      });
+      ['dairyFree', 'glutenFree', 'vegan', 'vegetarian'].forEach((key) => {
+        setSwitch({ key, value: recipe[key] });
+      });
+      recipe.instructions.forEach((step, index) => {
+        setValue({ key: `step${index + 1}`, value: step });
+      });
+      recipe.ingredients.forEach((ingredient, index) => {
+        setValue({
+          key: `ingredient${index + 1}-name`,
+          value: ingredient.name,
+        });
+        setValue({
+          key: `ingredient${index + 1}-amount`,
+          value: ingredient.amount,
+        });
+        setValue({
+          key: `ingredient${index + 1}-measure`,
+          value: ingredient.measure,
+        });
       });
     }
   }, [recipe]);
@@ -189,9 +210,11 @@ export default function RecipeForm({ onClose, recipe }) {
         {inputs.map((input, index) => {
           return <Input input={input} key={index} />;
         })}
-        <h2 className={styles.title}>Add Your Own Recipe</h2>
+        <h2 className={styles.title}>
+          {recipe ? 'Edit Recipe' : 'Add Your Own Recipe'}
+        </h2>
         <div className={styles.diets}>
-          <Switch id='isDairy'>
+          <Switch id='dairyFree'>
             <Image
               src='/dairy.svg'
               alt='dairy icon'
@@ -201,7 +224,7 @@ export default function RecipeForm({ onClose, recipe }) {
             />
             Dairy Free
           </Switch>
-          <Switch id='isGluten'>
+          <Switch id='glutenFree'>
             <Image
               src='/gluten.svg'
               alt='gluten icon'
@@ -211,7 +234,7 @@ export default function RecipeForm({ onClose, recipe }) {
             />
             Gluten Free
           </Switch>
-          <Switch id='isVegan'>
+          <Switch id='vegan'>
             <Image
               src='/vegan.svg'
               alt='vegan icon'
@@ -221,7 +244,7 @@ export default function RecipeForm({ onClose, recipe }) {
             />
             Vegan
           </Switch>
-          <Switch id='isVegetarian'>
+          <Switch id='vegetarian'>
             <Image
               src='/vegetarian.svg'
               alt='vegetarian icon'
@@ -232,8 +255,18 @@ export default function RecipeForm({ onClose, recipe }) {
             Vegetarian
           </Switch>
         </div>
-        <InputArray element={createIngredient} title='Ingredients' max={20} />
-        <InputArray element={createStep} title='Steps' max={30} />
+        <InputArray
+          element={createIngredient}
+          title='Ingredients'
+          max={20}
+          init={recipe ? recipe.ingredients.length : undefined}
+        />
+        <InputArray
+          element={createStep}
+          title='Steps'
+          max={30}
+          init={recipe ? recipe.instructions.length : undefined}
+        />
         <button
           type='submit'
           className={`${styles.saveButton} ${
