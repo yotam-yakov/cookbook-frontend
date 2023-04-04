@@ -48,7 +48,7 @@ export default function Recipe() {
           </p>
           <p className={styles.infoItem}>
             <Image src='/clock.svg' alt='time' width={24} height={24} />
-            {recipe.time}
+            {recipe.time} Minutes
           </p>
         </div>
         <div className={styles.diets}>

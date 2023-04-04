@@ -32,6 +32,10 @@
   text-overflow: ellipsis;
 }
 
+.titleSmall {
+  max-width: 12rem;
+}
+
 .edit {
   grid-column: 5 / -1;
 }

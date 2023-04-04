@@ -47,7 +47,7 @@ const convertRecipe = (recipe) => {
     title: title,
     recipeId: id,
     image: image,
-    time: convertTime(readyInMinutes),
+    time: readyInMinutes,
     servings: servings,
     source: sourceName,
     dairyFree: dairyFree,

@@ -18,6 +18,10 @@ const useValuesStorage = create((set) => ({
     set((state) => ({
       switches: { ...state.switches, [evt.target.name]: evt.target.checked },
     })),
+  setValue: (value) =>
+    set((state) => ({
+      values: { ...state.values, [value.key]: value.value },
+    })),
   clearAll: () =>
     set(() => ({
       values: {},

@@ -3,7 +3,10 @@ import useValuesStorage from '@/state/useValuesStorage';
 import styles from './Input.module.css';
 
 export default function Input({ input }) {
-  const handleChange = useValuesStorage((state) => state.handleChange);
+  const { values, handleChange } = useValuesStorage((state) => ({
+    values: state.values,
+    handleChange: state.handleChange,
+  }));
 
   return (
     <Fragment>
@@ -13,6 +16,7 @@ export default function Input({ input }) {
         </label>
       )}
       <input
+        value={values[input.id] || ''}
         type={input.type}
         onChange={handleChange}
         name={input.id}

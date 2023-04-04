@@ -55,20 +55,28 @@ export default function Card({ recipe, saved }) {
 
   return (
     <div onClick={openRecipe} className={styles.container}>
-      <h2 className={styles.title}>{recipe.title}</h2>
-      <button
-        type='button'
-        onClick={isActive ? removeRecipe : saveRecipe}
-        className={`${styles.button} ${styles.edit}`}
+      <h2
+        className={`${styles.title} ${
+          recipe.source === 'myRecipe' && styles.titleSmall
+        }`}
       >
-        <Image
-          src='/edit.svg'
-          alt='Add button'
-          width={32}
-          height={32}
-          className={`${styles.icon}`}
-        />
-      </button>
+        {recipe.title}
+      </h2>
+      {recipe.source === 'myRecipe' && (
+        <button
+          type='button'
+          onClick={isActive ? removeRecipe : saveRecipe}
+          className={`${styles.button} ${styles.edit}`}
+        >
+          <Image
+            src='/edit.svg'
+            alt='Add button'
+            width={32}
+            height={32}
+            className={`${styles.icon}`}
+          />
+        </button>
+      )}
       <Image
         src={recipe.image}
         alt='Recipe image'
@@ -84,7 +92,7 @@ export default function Card({ recipe, saved }) {
           height={24}
           className={styles.clock}
         />
-        {recipe.time}
+        {recipe.time} Min
       </p>
       <p className={styles.source}>{recipe.source}</p>
       <Image
