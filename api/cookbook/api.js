@@ -37,6 +37,16 @@ const addRecipe = (recipe, jwt) => {
     .then((res) => console.log(res));
 };
 
+const updateRecipe = (recipeId, updates, jwt) => {
+  return api
+    .patch(`recipes/${recipeId}`, updates, {
+      headers: {
+        Authorization: `Bearer ${jwt}`,
+      },
+    })
+    .then((res) => console.log(res));
+};
+
 const deleteRecipe = (recipeId, jwt) => {
   return api
     .delete(`recipes/${recipeId}`, {
@@ -75,6 +85,7 @@ export {
   signIn,
   signUp,
   addRecipe,
+  updateRecipe,
   deleteRecipe,
   getSavedRecipes,
   getMyRecipes,

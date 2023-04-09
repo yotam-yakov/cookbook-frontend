@@ -3,7 +3,7 @@ import Input from '../Input/Input';
 import Switch from '../Switch/Switch';
 import InputArray from '../InputArray/InputArray';
 import useValuesStorage from '@/state/useValuesStorage';
-import { addRecipe } from '@/api/cookbook/api';
+import { addRecipe, updateRecipe, getSavedRecipes } from '@/api/cookbook/api';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -22,6 +22,11 @@ export default function RecipeForm({ onClose, recipe }) {
       clearAll: state.clearAll,
     }));
   const router = useRouter();
+
+  const closeForm = () => {
+    clearAll();
+    onClose();
+  };
 
   const inputs = [
     {
@@ -149,7 +154,7 @@ export default function RecipeForm({ onClose, recipe }) {
       }
     }
 
-    const newRecipe = {
+    const recipeForm = {
       title: values.title,
       recipeId: 0,
       time: values.time,
@@ -164,16 +169,35 @@ export default function RecipeForm({ onClose, recipe }) {
       instructions: steps,
     };
 
-    addRecipe(newRecipe, Cookies.get('jwt'))
-      .then(() => {
-        onClose();
-        clearAll();
-      })
-      .catch((err) => console.error(err))
-      .finally(() => {
-        setIsLoading(false);
-        router.refresh();
+    if (recipe) {
+      const changes = Object.keys(recipeForm).filter(
+        (key) => JSON.stringify(recipe[key]) !== JSON.stringify(recipeForm[key])
+      );
+      const apiData = {};
+      changes.forEach((change) => {
+        apiData[change] = recipeForm[change];
       });
+
+      updateRecipe(recipe._id, apiData, Cookies.get('jwt'))
+        .then(() => {
+          onClose();
+          clearAll();
+          router.refresh();
+        })
+        .catch((err) => console.error(err))
+        .finally(() => setIsLoading(false));
+    } else {
+      addRecipe(newRecipe, Cookies.get('jwt'))
+        .then(() => {
+          onClose();
+          clearAll();
+          router.refresh();
+        })
+        .catch((err) => console.error(err))
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   };
 
   useEffect(() => {
@@ -201,11 +225,12 @@ export default function RecipeForm({ onClose, recipe }) {
           value: ingredient.measure,
         });
       });
+      console.log(recipe);
     }
   }, [recipe]);
 
   return (
-    <Popup onClose={onClose}>
+    <Popup onClose={closeForm}>
       <form onSubmit={submitAdd} className={styles.popup}>
         {inputs.map((input, index) => {
           return <Input input={input} key={index} />;
