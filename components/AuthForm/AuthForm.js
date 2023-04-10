@@ -96,6 +96,6 @@ export default function AuthForm({ type }) {
     case 'signup':
       return <Form {...signup} />;
     default:
-      return <h1>Error creatin form</h1>;
+      return <h1>Error creating form</h1>;
   }
 }
