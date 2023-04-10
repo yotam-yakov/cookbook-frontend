@@ -1,11 +1,11 @@
-import Card from '../Card/Card';
 import Image from 'next/image';
+import Card from '../Card/Card';
 import styles from './Recipes.module.css';
 
 export default function Recipes({ recipes, saved }) {
   return (
     <div className={styles.recipes}>
-      {recipes[0] !== 'empty' ? (
+      {recipes.length > 0 && recipes[0] !== 'empty' ? (
         recipes.map((recipe, index) => {
           return <Card recipe={recipe} saved={saved} key={index} />;
         })
