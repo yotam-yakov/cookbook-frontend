@@ -37,6 +37,7 @@ export default function Recipe() {
             src={recipe.image}
             alt='recipe image'
             fill
+            sizes='10vw'
             className={styles.image}
           />
         </div>

@@ -136,14 +136,17 @@ export default function Card({ recipe, saved }) {
           onClick={isActive ? removeRecipe : saveRecipe}
           className={`${styles.button} ${isActive && styles.buttonActive}`}
         >
-          <Image
-            src='/plus.svg'
-            alt='Add button'
-            width={32}
-            height={32}
-            className={`${styles.icon} ${isLoading && styles.loading}`}
-          />
-          {/* {isLoggedIn && <span className={styles.tooltip}>Log in to save</span>} */}
+          {isLoggedIn ? (
+            <Image
+              src='/plus.svg'
+              alt='Add button'
+              width={32}
+              height={32}
+              className={`${styles.icon} ${isLoading && styles.loading}`}
+            />
+          ) : (
+            <span className={styles.tooltip}>Log in to save</span>
+          )}
         </button>
       </div>
       {isEditOpen && (

@@ -8,8 +8,8 @@
   border-radius: 1.5rem;
   background-color: white;
   padding: 0.75rem;
-  width: 288px;
-  height: 388px;
+  width: 18rem;
+  height: 24.25rem;
   font-family: var(--font-main);
 }
 
@@ -25,7 +25,7 @@
   display: -webkit-box;
   grid-column: 1 / 5;
   margin: 0;
-  width: 264px;
+  width: 16.5rem;
   max-height: 4rem;
   overflow: hidden;
   line-height: 2rem;
@@ -91,21 +91,20 @@
 }
 
 .tooltip {
+  display: flex;
   position: absolute;
   top: 0;
   align-items: center;
-  opacity: 0;
   transition: 150ms linear opacity;
   margin: 0;
-  border: 1px solid var(--color-red);
+  border: 0.1rem solid black;
   border-radius: 1rem;
-  background-color: #bbb;
+  background-color: var(--color-second);
   padding: 0.25rem;
   width: 100%;
   height: 100%;
-  color: var(--color-red);
-  font-weight: 700;
-  font-size: 1rem;
+  color: black;
+  font-weight: 400;
   font-family: var(--font-main);
 }
 
@@ -116,11 +115,6 @@
 .button:hover {
   transform: scale(1.1);
   background-color: #bbb;
-}
-
-.button:hover .tooltip {
-  display: flex;
-  opacity: 1;
 }
 
 .buttonActive {

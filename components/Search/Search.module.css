@@ -1,10 +1,10 @@
 .search {
-  background-color: white;
-  max-width: 40rem;
+  display: grid;
   margin: 1rem auto;
   border-radius: 1.5rem;
+  background-color: white;
+  max-width: 40rem;
   overflow: hidden;
-  display: grid;
 }
 
 .form {
@@ -14,14 +14,14 @@
 }
 
 .query {
+  margin: 0;
+  border: none;
+  padding: 1rem;
   width: 100%;
   max-width: 30rem;
-  margin: 0;
-  padding: 1rem;
-  border: none;
+  font-weight: 300;
   font-size: 1.75rem;
   font-family: var(--font-main);
-  font-weight: 300;
 }
 
 .query:focus {
@@ -30,12 +30,12 @@
 }
 
 .button {
+  transition: 100ms linear background-color;
+  margin: auto;
+  background-color: transparent;
+  padding: 0;
   width: 100%;
   height: 100%;
-  margin: auto;
-  padding: 0;
-  background-color: transparent;
-  transition: 100ms linear background-color;
 }
 
 .button:hover {
@@ -47,28 +47,28 @@
 }
 
 .filter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  gap: 0.5rem 1rem;
+  transition: 250ms linear height;
   width: 100%;
   height: 0;
   text-align: center;
-  grid-column: 1 / -1;
-  grid-row: 2 / 3;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem 1rem;
-  transition: 250ms linear height;
 }
 
 .filterOpen {
-  height: 18rem;
+  border-top: 0.1rem solid black;
   padding: 1rem 0;
-  border-top: 1px solid black;
+  height: 18rem;
 }
 
 .label {
-  font-size: 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
 }
 
 .icon {
@@ -76,14 +76,14 @@
 }
 
 .input {
+  margin: 0.5rem auto;
+  border: none;
   width: 100%;
   max-width: 8rem;
   height: 1.75rem;
-  margin: 0.5rem auto;
-  border: none;
-  font-family: var(--font-main);
   font-weight: 300;
   font-size: 1.5rem;
+  font-family: var(--font-main);
   text-align: center;
 }
 
@@ -104,8 +104,8 @@
 
 @media screen and (max-width: 425px) {
   .form {
-    grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, auto);
+    grid-template-columns: 1fr 1fr;
   }
 
   .query {
@@ -117,10 +117,10 @@
   }
 
   .filterOpen {
-    height: fit-content;
     display: flex;
-    flex-direction: column;
     grid-row: 3 / -1;
+    flex-direction: column;
+    height: fit-content;
   }
 
   .label {
