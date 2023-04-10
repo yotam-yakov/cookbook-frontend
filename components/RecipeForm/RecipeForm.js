@@ -40,7 +40,7 @@ export default function RecipeForm({ onClose, recipe }) {
       id: 'time',
       title: 'Time',
       type: 'number',
-      placeholder: 'How much time does it take?',
+      placeholder: 'Time in minutes',
       style: styles.input,
       props: {
         onWheel: (evt) => evt.target.blur(),
@@ -236,12 +236,12 @@ export default function RecipeForm({ onClose, recipe }) {
   return (
     <Popup onClose={closeForm}>
       <form onSubmit={submitAdd} className={styles.popup}>
-        {inputs.map((input, index) => {
-          return <Input input={input} key={index} />;
-        })}
         <h2 className={styles.title}>
           {recipe ? 'Edit Recipe' : 'Add Your Own Recipe'}
         </h2>
+        {inputs.map((input, index) => {
+          return <Input input={input} key={index} />;
+        })}
         <div className={styles.diets}>
           <Switch id='dairyFree'>
             <Image
