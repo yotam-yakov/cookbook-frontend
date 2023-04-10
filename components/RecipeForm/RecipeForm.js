@@ -178,14 +178,20 @@ export default function RecipeForm({ onClose, recipe }) {
         apiData[change] = recipeForm[change];
       });
 
-      updateRecipe(recipe._id, apiData, Cookies.get('jwt'))
-        .then(() => {
-          onClose();
-          clearAll();
-          router.refresh();
-        })
-        .catch((err) => console.error(err))
-        .finally(() => setIsLoading(false));
+      if (changes.length === 0) {
+        setIsLoading(false);
+        onClose();
+        clearAll();
+      } else {
+        updateRecipe(recipe._id, apiData, Cookies.get('jwt'))
+          .then(() => {
+            onClose();
+            clearAll();
+            router.refresh();
+          })
+          .catch((err) => console.error(err))
+          .finally(() => setIsLoading(false));
+      }
     } else {
       addRecipe(newRecipe, Cookies.get('jwt'))
         .then(() => {
@@ -194,9 +200,7 @@ export default function RecipeForm({ onClose, recipe }) {
           router.refresh();
         })
         .catch((err) => console.error(err))
-        .finally(() => {
-          setIsLoading(false);
-        });
+        .finally(() => setIsLoading(false));
     }
   };
 

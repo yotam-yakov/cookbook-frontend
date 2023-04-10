@@ -5,7 +5,7 @@ import styles from './Recipes.module.css';
 export default function Recipes({ recipes, saved }) {
   return (
     <div className={styles.recipes}>
-      {recipes.length > 0 ? (
+      {recipes[0] !== 'empty' ? (
         recipes.map((recipe, index) => {
           return <Card recipe={recipe} saved={saved} key={index} />;
         })
