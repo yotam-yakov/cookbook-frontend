@@ -4,7 +4,7 @@ import convertRecipe from './convert';
 const api = axios.create({
   baseURL: 'https://api.spoonacular.com/recipes',
   params: {
-    apiKey: '746601734f124fa79b175f4ad0fd8ece',
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
   },
 });
 

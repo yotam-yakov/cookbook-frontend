@@ -229,7 +229,6 @@ export default function RecipeForm({ onClose, recipe }) {
           value: ingredient.measure,
         });
       });
-      console.log(recipe);
     }
   }, [recipe]);
 
