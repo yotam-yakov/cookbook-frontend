@@ -3,13 +3,14 @@ import Link from 'next/link';
 import useUserStorage from '@/state/useUserStorage';
 import styles from './Header.module.css';
 import cookies from 'js-cookie';
-import { usePathname } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 export default function Header() {
   const { isLoggedIn, logOut } = useUserStorage((state) => ({
     isLoggedIn: state.isLoggedIn,
     logOut: state.logOut,
   }));
+  const router = useRouter();
   const pathname = usePathname();
 
   const signOut = () => {

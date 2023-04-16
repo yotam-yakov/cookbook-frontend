@@ -4,6 +4,7 @@ import styles from './Search.module.css';
 import useValuesStorage from '@/state/useValuesStorage';
 import useRecipeStorage from '@/state/useRecipeStorage';
 import { submitSearch } from '@/api/recipes/api';
+import Cookies from 'js-cookie';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,7 +16,10 @@ export default function Search() {
       handleSwitches: state.handleSwitches,
     })
   );
-  const setSearchResults = useRecipeStorage((state) => state.setSearchResults);
+  const { savedRecipes, setSearchResults } = useRecipeStorage((state) => ({
+    savedRecipes: state.savedRecipes,
+    setSearchResults: state.setSearchResults,
+  }));
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -39,6 +43,14 @@ export default function Search() {
         if (recipes.length === 0) {
           setSearchResults(['empty']);
         } else {
+          recipes.forEach((recipe) => {
+            if (
+              JSON.parse(Cookies.get('savedRecipes')).includes(recipe.recipeId)
+            ) {
+              recipe.saved = true;
+            }
+          });
+          console.log(recipes);
           setSearchResults(recipes);
         }
         setIsFilterOpen(false);

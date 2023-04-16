@@ -2,15 +2,17 @@
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import { addRecipe, deleteRecipe } from '../../api/cookbook/api';
+import { addRecipe, deleteRecipe } from '@/api/cookbook/api';
 import useRecipeStorage from '@/state/useRecipeStorage';
 import useUserStorage from '@/state/useUserStorage';
 import styles from './Card.module.css';
 import Cookies from 'js-cookie';
 import RecipeForm from '../RecipeForm/RecipeForm';
 
-export default function Card({ recipe, saved }) {
-  const [isActive, setIsActive] = useState(saved);
+export default function Card({ recipe }) {
+  const [isActive, setIsActive] = useState(
+    recipe.recipeId === 0 ? true : recipe.saved
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const setRecipe = useRecipeStorage((state) => state.setRecipe);
@@ -23,10 +25,21 @@ export default function Card({ recipe, saved }) {
     evt.stopPropagation();
     if (isLoggedIn) {
       setIsLoading(true);
+
+      delete recipe.saved;
+
       addRecipe(recipe, jwt)
         .then(() => {
+          if (recipe.recipeId !== 0) {
+            const recipesIds = JSON.parse(Cookies.get('savedRecipes'));
+            if (!recipesIds.includes(recipe.recipeId)) {
+              recipesIds.push(recipe.recipeId);
+              Cookies.set('savedRecipes', JSON.stringify(recipesIds));
+            }
+          }
           setIsActive(true);
           router.refresh();
+          recipe.saved = true;
         })
         .catch((err) => console.error(err))
         .finally(() => setIsLoading(false));
@@ -43,6 +56,12 @@ export default function Card({ recipe, saved }) {
     deleteRecipe(cardId, jwt)
       .then(() => {
         setIsActive(false);
+        if (recipe.recipeId !== 0) {
+          const recipesIds = JSON.parse(Cookies.get('savedRecipes'));
+          const filteredIds = recipesIds.filter((id) => id !== recipe.recipeId);
+          Cookies.set('savedRecipes', JSON.stringify(filteredIds));
+          recipe.saved = false;
+        }
         if (pathname === 'savedrecipes' || 'myrecipes') {
           router.refresh();
         }
@@ -136,7 +155,14 @@ export default function Card({ recipe, saved }) {
           onClick={isActive ? removeRecipe : saveRecipe}
           className={`${styles.button} ${isActive && styles.buttonActive}`}
         >
-          {isLoggedIn ? (
+          <Image
+            src={isLoggedIn ? '/plus.svg' : '/logged-out.svg'}
+            alt='Add button'
+            width={32}
+            height={32}
+            className={`${styles.icon} ${isLoading && styles.loading}`}
+          />
+          {/* {isLoggedIn ? (
             <Image
               src='/plus.svg'
               alt='Add button'
@@ -145,8 +171,14 @@ export default function Card({ recipe, saved }) {
               className={`${styles.icon} ${isLoading && styles.loading}`}
             />
           ) : (
-            <span className={styles.tooltip}>Log in to save</span>
-          )}
+            <Image
+              src='/logged-out.svg'
+              alt='logged out button'
+              width={32}
+              height={32}
+              className={`${styles.icon} ${isLoading && styles.loading}`}
+            />
+          )} */}
         </button>
       </div>
       {isEditOpen && (

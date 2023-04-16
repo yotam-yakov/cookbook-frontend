@@ -3,8 +3,9 @@ import { useRouter } from 'next/navigation';
 import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
 import useUserStorage from '@/state/useUserStorage';
-import { signIn } from '@/api/cookbook/api';
+import { signIn, signUp, getSavedRecipes } from '@/api/cookbook/api';
 import Cookies from 'js-cookie';
+import useRecipeStorage from '@/state/useRecipeStorage';
 
 export default function AuthForm({ type }) {
   const values = useValuesStorage((state) => state.values);
@@ -19,6 +20,13 @@ export default function AuthForm({ type }) {
       password: values.password,
     })
       .then((token) => {
+        getSavedRecipes(token).then((recipes) => {
+          let recipesId = [];
+          recipes.forEach((recipe) => {
+            recipesId.push(recipe.recipeId);
+          });
+          Cookies.set('savedRecipes', JSON.stringify(recipesId));
+        });
         Cookies.set('jwt', token);
         router.push('/');
         logIn();
