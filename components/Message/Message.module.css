@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.message {
+  margin-top: 0;
+  max-width: 20rem;
+  font-size: 1.5rem;
+}
+
+.error {
+  color: var(--color-red);
+}
+
+.button {
+  transition: 150ms;
+  margin: 0 auto;
+  border-radius: 1rem;
+  background-color: var(--color-second);
+  padding: 0;
+  width: 10rem;
+  height: 3rem;
+  color: black;
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: var(--font-main);
+}
+
+.button:hover {
+  opacity: 0.7;
+}
+
+.button:active {
+  transform: scale(0.9);
+  opacity: 0.9;
+}

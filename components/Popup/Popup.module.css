@@ -15,8 +15,8 @@
   border-radius: 1.5rem;
   background-color: var(--color-base);
   padding: 1rem;
-  width: 90%;
-  max-width: 50rem;
+  width: fit-content;
+  max-width: 40rem;
   overflow-y: scroll;
 }
 
