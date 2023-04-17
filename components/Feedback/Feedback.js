@@ -1,13 +1,22 @@
 'use client';
 import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
+import { sendFeedback } from '@/api/cookbook/api';
+import { useRouter } from 'next/navigation';
 
 export default function Feedback() {
   const values = useValuesStorage((state) => state.values);
+  const router = useRouter();
 
   const submitFeedback = (evt) => {
     evt.preventDefault();
-    console.log(values);
+    sendFeedback({
+      email: values.email,
+      title: values.title,
+      text: values.text,
+    })
+      .then(() => router.push('/'))
+      .catch((err) => console.error(err));
   };
   const feedback = {
     title: 'Tell us your thoughts',
@@ -19,7 +28,7 @@ export default function Feedback() {
       {
         id: 'email',
         title: 'Email',
-        type: 'text',
+        type: 'email',
         placeholder: 'Email',
         props: {
           required: true,

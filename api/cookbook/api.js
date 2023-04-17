@@ -81,6 +81,10 @@ const getMyRecipes = (jwt) => {
     });
 };
 
+const sendFeedback = (feedback) => {
+  return api.post('/feedback', feedback).then((res) => console.log(res));
+};
+
 export {
   signIn,
   signUp,
@@ -89,4 +93,5 @@ export {
   deleteRecipe,
   getSavedRecipes,
   getMyRecipes,
+  sendFeedback,
 };
