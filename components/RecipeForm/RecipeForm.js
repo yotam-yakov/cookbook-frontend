@@ -193,7 +193,7 @@ export default function RecipeForm({ onClose, recipe }) {
           .finally(() => setIsLoading(false));
       }
     } else {
-      addRecipe(newRecipe, Cookies.get('jwt'))
+      addRecipe(recipeForm, Cookies.get('jwt'))
         .then(() => {
           onClose();
           clearAll();
