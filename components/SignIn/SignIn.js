@@ -1,14 +1,24 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Form from '@/components/Form/Form';
+import Message from '@/components/Message/Message';
 import useValuesStorage from '@/state/useValuesStorage';
 import useUserStorage from '@/state/useUserStorage';
+import useMessageStorage from '@/state/useMessageStorage';
 import { signIn, getSavedRecipes } from '@/api/cookbook/api';
 import Cookies from 'js-cookie';
+import { Fragment } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function SignIn() {
   const values = useValuesStorage((state) => state.values);
   const logIn = useUserStorage((state) => state.logIn);
+  const { isMessageOpen, setMessageProps, openMessage } = useMessageStorage(
+    (state) => ({
+      isMessageOpen: state.isMessageOpen,
+      setMessageProps: state.setMessageProps,
+      openMessage: state.openMessage,
+    })
+  );
   const router = useRouter();
 
   const submitSignin = (evt) => {
@@ -19,18 +29,30 @@ export default function SignIn() {
       password: values.password,
     })
       .then((token) => {
+        Cookies.set('jwt', token);
         getSavedRecipes(token).then((recipes) => {
-          let recipesId = [];
-          recipes.forEach((recipe) => {
-            recipesId.push(recipe.recipeId);
-          });
+          const recipesId = recipes.map((recipe) => recipe.recipeId);
           Cookies.set('savedRecipes', JSON.stringify(recipesId));
         });
-        Cookies.set('jwt', token);
-        router.push('/');
-        logIn();
       })
-      .catch((err) => console.error(err.response.data.message));
+      .then(() => {
+        setMessageProps({
+          message: 'Log In successful, You will now be redirected to homepage',
+          isError: false,
+          onClose: () => {
+            router.push('/');
+            logIn();
+          },
+        });
+      })
+      .catch((err) => {
+        setMessageProps({
+          message: err.response.data.message,
+          isError: true,
+          onClose: () => {},
+        });
+        console.error(err);
+      });
   };
   const signin = {
     title: 'Sign In',
@@ -63,5 +85,10 @@ export default function SignIn() {
     },
   };
 
-  return <Form {...signin} />;
+  return (
+    <Fragment>
+      {isMessageOpen && <Message />}
+      <Form {...signin} />
+    </Fragment>
+  );
 }
