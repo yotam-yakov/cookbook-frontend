@@ -1,15 +1,21 @@
 import { NextResponse } from 'next/server';
 
 export function middleware(request) {
-  const urls = ['/myrecipes', '/savedrecipes'];
+  const protectedUrls = ['/myrecipes', '/savedrecipes'];
+  const authUrls = ['/signin', '/signup'];
   const jwt = request.cookies.get('jwt');
 
-  if (urls.includes(request.nextUrl.pathname)) {
-    if (!jwt) {
+  if (jwt) {
+    if (authUrls.includes(request.nextUrl.pathname)) {
+      return NextResponse.rewrite(new URL('/', request.url));
+    }
+  } else {
+    if (protectedUrls.includes(request.nextUrl.pathname)) {
       return NextResponse.rewrite(new URL('/signin', request.url));
     }
-    return NextResponse.next();
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

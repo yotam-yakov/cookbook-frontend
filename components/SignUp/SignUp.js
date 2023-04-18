@@ -1,11 +1,18 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Form from '@/components/Form/Form';
+import Message from '@/components/Message/Message';
 import useValuesStorage from '@/state/useValuesStorage';
+import useMessageStorage from '@/state/useMessageStorage';
 import { signUp } from '@/api/cookbook/api';
+import { useRouter } from 'next/navigation';
+import { Fragment } from 'react';
 
 export default function SignUp() {
   const values = useValuesStorage((state) => state.values);
+  const { isMessageOpen, setMessageProps } = useMessageStorage((state) => ({
+    isMessageOpen: state.isMessageOpen,
+    setMessageProps: state.setMessageProps,
+  }));
   const router = useRouter();
 
   const submitSignup = () => {
@@ -14,8 +21,22 @@ export default function SignUp() {
       name: values.username,
       password: values.password,
     })
-      .then(() => router.push('/signin'))
-      .catch((err) => console.error(err));
+      .then(() =>
+        setMessageProps({
+          message:
+            'Sign up successful, You will now be redirected to sign in page',
+          isError: false,
+          onClose: () => router.push('/signin'),
+        })
+      )
+      .catch((err) => {
+        setMessageProps({
+          message: err.response.data.message,
+          isError: false,
+          onClose: () => {},
+        });
+        console.error(err);
+      });
   };
 
   const signup = {
@@ -57,5 +78,10 @@ export default function SignUp() {
     },
   };
 
-  return <Form {...signup} />;
+  return (
+    <Fragment>
+      {isMessageOpen && <Message />}
+      <Form {...signup} />
+    </Fragment>
+  );
 }

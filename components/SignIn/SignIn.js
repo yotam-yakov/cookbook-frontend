@@ -12,13 +12,10 @@ import { useRouter } from 'next/navigation';
 export default function SignIn() {
   const values = useValuesStorage((state) => state.values);
   const logIn = useUserStorage((state) => state.logIn);
-  const { isMessageOpen, setMessageProps, openMessage } = useMessageStorage(
-    (state) => ({
-      isMessageOpen: state.isMessageOpen,
-      setMessageProps: state.setMessageProps,
-      openMessage: state.openMessage,
-    })
-  );
+  const { isMessageOpen, setMessageProps } = useMessageStorage((state) => ({
+    isMessageOpen: state.isMessageOpen,
+    setMessageProps: state.setMessageProps,
+  }));
   const router = useRouter();
 
   const submitSignin = (evt) => {
