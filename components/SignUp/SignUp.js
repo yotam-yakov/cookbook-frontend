@@ -1,18 +1,13 @@
 'use client';
 import Form from '@/components/Form/Form';
-import Message from '@/components/Message/Message';
 import useValuesStorage from '@/state/useValuesStorage';
 import useMessageStorage from '@/state/useMessageStorage';
 import { signUp } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
-import { Fragment } from 'react';
 
 export default function SignUp() {
   const values = useValuesStorage((state) => state.values);
-  const { isMessageOpen, setMessageProps } = useMessageStorage((state) => ({
-    isMessageOpen: state.isMessageOpen,
-    setMessageProps: state.setMessageProps,
-  }));
+  const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
   const submitSignup = () => {
@@ -78,10 +73,5 @@ export default function SignUp() {
     },
   };
 
-  return (
-    <Fragment>
-      {isMessageOpen && <Message />}
-      <Form {...signup} />
-    </Fragment>
-  );
+  return <Form {...signup} />;
 }

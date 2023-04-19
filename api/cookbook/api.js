@@ -4,13 +4,18 @@ const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
+const logResponse = (res) => {
+  console.log(res);
+  return res.data;
+};
+
 const signIn = ({ email, password }) => {
   return api
     .post('/signin', {
       email,
       password,
     })
-    .then((res) => res.data.token);
+    .then(logResponse);
 };
 
 const signUp = ({ email, name, password }) => {
@@ -20,7 +25,7 @@ const signUp = ({ email, name, password }) => {
       name,
       password,
     })
-    .then((res) => console.log(res));
+    .then(logResponse);
 };
 
 const addRecipe = (recipe, jwt) => {
@@ -34,7 +39,7 @@ const addRecipe = (recipe, jwt) => {
         },
       }
     )
-    .then((res) => console.log(res));
+    .then(logResponse);
 };
 
 const updateRecipe = (recipeId, updates, jwt) => {
@@ -44,7 +49,7 @@ const updateRecipe = (recipeId, updates, jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     })
-    .then((res) => console.log(res));
+    .then(logResponse);
 };
 
 const deleteRecipe = (recipeId, jwt) => {
@@ -54,7 +59,7 @@ const deleteRecipe = (recipeId, jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     })
-    .then((res) => console.log(res.data));
+    .then(logResponse);
 };
 
 const getSavedRecipes = (jwt) => {
@@ -64,9 +69,7 @@ const getSavedRecipes = (jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     })
-    .then((res) => {
-      return res.data;
-    });
+    .then(logResponse);
 };
 
 const getMyRecipes = (jwt) => {
@@ -76,13 +79,11 @@ const getMyRecipes = (jwt) => {
         Authorization: `Bearer ${jwt}`,
       },
     })
-    .then((res) => {
-      return res.data;
-    });
+    .then(logResponse);
 };
 
 const sendFeedback = (feedback) => {
-  return api.post('/feedback', feedback).then((res) => console.log(res));
+  return api.post('/feedback', feedback).then(logResponse);
 };
 
 export {

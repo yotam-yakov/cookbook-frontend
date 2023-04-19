@@ -5,6 +5,7 @@ import { Fragment, useState } from 'react';
 import { addRecipe, deleteRecipe } from '@/api/cookbook/api';
 import useRecipeStorage from '@/state/useRecipeStorage';
 import useUserStorage from '@/state/useUserStorage';
+import useMessageStorage from '@/state/useMessageStorage';
 import styles from './Card.module.css';
 import Cookies from 'js-cookie';
 import RecipeForm from '../RecipeForm/RecipeForm';
@@ -17,6 +18,7 @@ export default function Card({ recipe }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const setRecipe = useRecipeStorage((state) => state.setRecipe);
   const isLoggedIn = useUserStorage((state) => state.isLoggedIn);
+  const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
   const pathname = usePathname();
   const jwt = Cookies.get('jwt');
@@ -41,7 +43,15 @@ export default function Card({ recipe }) {
           router.refresh();
           recipe.saved = true;
         })
-        .catch((err) => console.error(err))
+        .catch((err) => {
+          setMessageProps({
+            message: `The request returned an error, try again later.
+            Message: '${err.response.data.message}'`,
+            isError: true,
+            onClose: () => {},
+          });
+          console.error(err);
+        })
         .finally(() => setIsLoading(false));
     } else {
       router.push('/signin');
@@ -66,7 +76,15 @@ export default function Card({ recipe }) {
           router.refresh();
         }
       })
-      .catch((err) => console.error(err))
+      .catch((err) => {
+        setMessageProps({
+          message: `The request returned an error, try again later.
+          Message: '${err.response.data.message}'`,
+          isError: true,
+          onClose: () => {},
+        });
+        console.error(err);
+      })
       .finally(() => setIsLoading(false));
   };
 

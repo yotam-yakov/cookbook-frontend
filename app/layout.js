@@ -5,16 +5,19 @@ import Add from '@/components/Add/Add';
 import Footer from '@/components/Footer/Footer';
 import Header from '@/components/Header/Header';
 import Recipe from '@/components/Recipe/Recipe';
+import Message from '@/components/Message/Message';
 import useUserStorage from '@/state/useUserStorage';
 import useRecipeStorage from '@/state/useRecipeStorage';
 import { useEffect } from 'react';
 import Cookies from 'js-cookie';
+import useMessageStorage from '@/state/useMessageStorage';
 
 export default function RootLayout({ children }) {
   const { isLoggedIn, logIn } = useUserStorage((state) => ({
     isLoggedIn: state.isLoggedIn,
     logIn: state.logIn,
   }));
+  const isMessageOpen = useMessageStorage((state) => state.isMessageOpen);
   const recipe = useRecipeStorage((state) => state.recipe);
 
   useEffect(() => {
@@ -36,6 +39,7 @@ export default function RootLayout({ children }) {
         {children}
         {isLoggedIn && <Add />}
         {Object.keys(recipe).length !== 0 && <Recipe {...recipe} />}
+        {isMessageOpen && <Message />}
         <Footer />
       </body>
     </html>
