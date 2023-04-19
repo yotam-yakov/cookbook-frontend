@@ -1,4 +1,4 @@
-import SignUp from '@/components/SignUp/SignUp';
+import Register from '@/components/Register/Register';
 
 export const metadata = {
   title: 'Sign Up',
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function SignIn() {
-  return <SignUp />;
+  return <Register />;
 }
