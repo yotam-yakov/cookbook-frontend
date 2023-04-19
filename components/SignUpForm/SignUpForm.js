@@ -1,62 +1,58 @@
 'use client';
 import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
-import useUserStorage from '@/state/useUserStorage';
 import useMessageStorage from '@/state/useMessageStorage';
-import { signIn, getSavedRecipes } from '@/api/cookbook/api';
-import Cookies from 'js-cookie';
+import { signUp } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
 
-export default function SignIn() {
+export default function SignUpForm() {
   const values = useValuesStorage((state) => state.values);
-  const logIn = useUserStorage((state) => state.logIn);
   const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
-  const submitSignin = (evt) => {
-    evt.preventDefault();
-
-    signIn({
+  const submitSignup = () => {
+    signUp({
       email: values.email,
+      name: values.username,
       password: values.password,
     })
-      .then((data) => {
-        Cookies.set('jwt', data.token);
-        getSavedRecipes(data.token).then((recipes) => {
-          const recipesId = recipes.map((recipe) => recipe.recipeId);
-          Cookies.set('savedRecipes', JSON.stringify(recipesId));
-        });
-      })
-      .then(() => {
+      .then(() =>
         setMessageProps({
-          message: 'Log In successful! You will now be redirected to homepage',
+          message:
+            'Sign up successful, You will now be redirected to sign in page',
           isError: false,
-          onClose: () => {
-            router.push('/');
-            logIn();
-          },
-        });
-      })
+          onClose: () => router.push('/signin'),
+        })
+      )
       .catch((err) => {
         setMessageProps({
           message: err.response.data.message,
-          isError: true,
+          isError: false,
           onClose: () => {},
         });
         console.error(err);
       });
   };
-  const signin = {
-    title: 'Sign In',
+
+  const signup = {
+    title: 'Sign Up',
     submit: {
-      text: 'Log In',
-      handler: submitSignin,
+      text: 'Register',
+      handler: submitSignup,
     },
     inputs: [
       {
         id: 'email',
         type: 'email',
         placeholder: 'Email',
+        props: {
+          required: true,
+        },
+      },
+      {
+        id: 'username',
+        type: 'text',
+        placeholder: 'Username',
         props: {
           required: true,
         },
@@ -72,10 +68,10 @@ export default function SignIn() {
       },
     ],
     redirect: {
-      url: '/signup',
-      text: 'New user? Click here to sign up!',
+      url: '/signin',
+      text: 'Already a member? Click here to sign in!',
     },
   };
 
-  return <Form {...signin} />;
+  return <Form {...signup} />;
 }

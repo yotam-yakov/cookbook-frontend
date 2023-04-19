@@ -5,7 +5,7 @@ import useMessageStorage from '@/state/useMessageStorage';
 import { sendFeedback } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
 
-export default function Feedback() {
+export default function FeedbackForm() {
   const values = useValuesStorage((state) => state.values);
   const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();

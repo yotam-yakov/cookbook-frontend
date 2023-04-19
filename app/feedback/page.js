@@ -1,5 +1,5 @@
-import Feedback from '@/components/Feedback/Feedback';
+import FeedbackForm from '@/components/FeedbackForm/FeedbackForm';
 
 export default function Feedback() {
-  return <Feedback />;
+  return <FeedbackForm />;
 }
