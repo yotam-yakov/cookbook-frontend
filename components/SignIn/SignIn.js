@@ -37,7 +37,14 @@ export default function SignIn() {
           },
         });
       })
-      .catch(console.error);
+      .catch((err) => {
+        setMessageProps({
+          message: err.response.data.message,
+          isError: true,
+          onClose: () => {},
+        });
+        console.error(err);
+      });
   };
   const signin = {
     title: 'Sign In',

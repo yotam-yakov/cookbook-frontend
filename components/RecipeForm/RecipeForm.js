@@ -3,7 +3,8 @@ import Input from '../Input/Input';
 import Switch from '../Switch/Switch';
 import InputArray from '../InputArray/InputArray';
 import useValuesStorage from '@/state/useValuesStorage';
-import { addRecipe, updateRecipe, getSavedRecipes } from '@/api/cookbook/api';
+import useMessageStorage from '@/state/useMessageStorage';
+import { addRecipe, updateRecipe } from '@/api/cookbook/api';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -21,6 +22,7 @@ export default function RecipeForm({ onClose, recipe }) {
       setSwitch: state.setSwitch,
       clearAll: state.clearAll,
     }));
+  const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
   const closeForm = () => {
@@ -180,8 +182,7 @@ export default function RecipeForm({ onClose, recipe }) {
 
       if (changes.length === 0) {
         setIsLoading(false);
-        onClose();
-        clearAll();
+        closeForm();
       } else {
         updateRecipe(recipe._id, apiData, Cookies.get('jwt'))
           .then(() => {
@@ -189,17 +190,30 @@ export default function RecipeForm({ onClose, recipe }) {
             clearAll();
             router.refresh();
           })
-          .catch((err) => console.error(err))
+          .catch((err) => {
+            setMessageProps({
+              message: `Recipe could not be updated. Message: '${err.response.data.message}'`,
+              isError: true,
+              onClose: () => {},
+            });
+            console.error(err);
+          })
           .finally(() => setIsLoading(false));
       }
     } else {
       addRecipe(recipeForm, Cookies.get('jwt'))
         .then(() => {
-          onClose();
-          clearAll();
+          closeForm();
           router.refresh();
         })
-        .catch((err) => console.error(err))
+        .catch((err) => {
+          setMessageProps({
+            message: `Recipe could not be saved. Message: '${err.response.data.message}'`,
+            isError: true,
+            onClose: () => {},
+          });
+          console.error(err);
+        })
         .finally(() => setIsLoading(false));
     }
   };

@@ -55,7 +55,14 @@ export default function Search() {
         }
         setIsFilterOpen(false);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        setMessageProps({
+          message: `Search could not be completed. Message: '${err.response.data.message}'`,
+          isError: true,
+          onClose: () => {},
+        });
+        console.error(err);
+      });
   };
 
   return (

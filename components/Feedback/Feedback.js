@@ -1,11 +1,13 @@
 'use client';
 import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
+import useMessageStorage from '@/state/useMessageStorage';
 import { sendFeedback } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
 
 export default function Feedback() {
   const values = useValuesStorage((state) => state.values);
+  const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
   const submitFeedback = (evt) => {
@@ -15,8 +17,22 @@ export default function Feedback() {
       title: values.title,
       text: values.text,
     })
-      .then(() => router.push('/'))
-      .catch((err) => console.error(err));
+      .then(() => {
+        setMessageProps({
+          message:
+            'Thanks for your feedback! You are now redirected to the homepage',
+          isError: false,
+          onClose: () => router.push('/'),
+        });
+      })
+      .catch((err) => {
+        setMessageProps({
+          message: `The request returned an error, try again later. Message: '${err.response.data.message}'`,
+          isError: true,
+          onClose: () => {},
+        });
+        console.error(err);
+      });
   };
   const feedback = {
     title: 'Tell us your thoughts',
