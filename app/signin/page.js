@@ -1,4 +1,4 @@
-import LogIn from '@/components/LogIn/SignInForm';
+import SignInForm from '@/components/SignInForm/SignInForm';
 
 export const metadata = {
   title: 'Sign In',
@@ -6,5 +6,5 @@ export const metadata = {
 };
 
 export default function SignIn() {
-  return <LogIn />;
+  return <SignInForm />;
 }
