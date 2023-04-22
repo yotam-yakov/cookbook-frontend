@@ -26,7 +26,7 @@ export default function SignUpForm() {
       )
       .catch((err) => {
         setMessageProps({
-          message: err.response.data.message,
+          message: err.response ? err.response.data.message : 'Server Error',
           isError: false,
           onClose: () => {},
         });

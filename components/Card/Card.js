@@ -46,7 +46,9 @@ export default function Card({ recipe }) {
         .catch((err) => {
           setMessageProps({
             message: `The request returned an error, try again later.
-            Message: '${err.response.data.message}'`,
+            Message: '${
+              err.response ? err.response.data.message : 'Server Error'
+            }'`,
             isError: true,
             onClose: () => {},
           });
@@ -79,7 +81,9 @@ export default function Card({ recipe }) {
       .catch((err) => {
         setMessageProps({
           message: `The request returned an error, try again later.
-          Message: '${err.response.data.message}'`,
+          Message: '${
+            err.response ? err.response.data.message : 'Server Error'
+          }'`,
           isError: true,
           onClose: () => {},
         });

@@ -27,7 +27,9 @@ export default function FeedbackForm() {
       })
       .catch((err) => {
         setMessageProps({
-          message: `The request returned an error, try again later. Message: '${err.response.data.message}'`,
+          message: `The request returned an error, try again later. Message: '${
+            err.response ? err.response.data.message : 'Server Error'
+          }'`,
           isError: true,
           onClose: () => {},
         });

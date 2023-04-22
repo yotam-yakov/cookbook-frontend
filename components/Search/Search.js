@@ -57,7 +57,9 @@ export default function Search() {
       })
       .catch((err) => {
         setMessageProps({
-          message: `Search could not be completed. Message: '${err.response.data.message}'`,
+          message: `Search could not be completed. Message: '${
+            err.response ? err.response.data.message : 'Server Error'
+          }'`,
           isError: true,
           onClose: () => {},
         });

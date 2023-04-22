@@ -192,7 +192,9 @@ export default function RecipeForm({ onClose, recipe }) {
           })
           .catch((err) => {
             setMessageProps({
-              message: `Recipe could not be updated. Message: '${err.response.data.message}'`,
+              message: `Recipe could not be updated. Message: '${
+                err.response ? err.response.data.message : 'Server Error'
+              }'`,
               isError: true,
               onClose: () => {},
             });
@@ -208,7 +210,9 @@ export default function RecipeForm({ onClose, recipe }) {
         })
         .catch((err) => {
           setMessageProps({
-            message: `Recipe could not be saved. Message: '${err.response.data.message}'`,
+            message: `Recipe could not be saved. Message: '${
+              err.response ? err.response.data.message : 'Server Error'
+            }'`,
             isError: true,
             onClose: () => {},
           });

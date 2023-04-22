@@ -39,7 +39,7 @@ export default function SignInForm() {
       })
       .catch((err) => {
         setMessageProps({
-          message: err.response.data.message,
+          message: err.response ? err.response.data.message : 'Unknown Error',
           isError: true,
           onClose: () => {},
         });
