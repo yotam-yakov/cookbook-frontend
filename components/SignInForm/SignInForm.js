@@ -3,7 +3,7 @@ import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
 import useUserStorage from '@/state/useUserStorage';
 import useMessageStorage from '@/state/useMessageStorage';
-import { signIn, getSavedRecipes } from '@/api/cookbook/api';
+import { signIn, getSavedRecipes } from '@/api/cookbook';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';

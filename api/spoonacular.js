@@ -1,5 +1,5 @@
 import axios from 'axios';
-import convertRecipe from './convert';
+import convertRecipe from '@/utils/convert';
 
 const api = axios.create({
   baseURL: 'https://api.spoonacular.com/recipes',
@@ -8,7 +8,7 @@ const api = axios.create({
   },
 });
 
-const submitSearch = (search) => {
+export const submitSearch = (search) => {
   return api
     .get('/complexSearch', {
       params: {
@@ -26,5 +26,3 @@ const submitSearch = (search) => {
       return convertedRecipes;
     });
 };
-
-export { submitSearch };

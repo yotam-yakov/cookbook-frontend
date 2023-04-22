@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { Fragment, useState } from 'react';
-import { addRecipe, deleteRecipe } from '@/api/cookbook/api';
+import { addRecipe, deleteRecipe } from '@/api/cookbook';
 import useRecipeStorage from '@/state/useRecipeStorage';
 import useUserStorage from '@/state/useUserStorage';
 import useMessageStorage from '@/state/useMessageStorage';

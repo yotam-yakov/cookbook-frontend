@@ -3,7 +3,8 @@ import { useState } from 'react';
 import styles from './Search.module.css';
 import useValuesStorage from '@/state/useValuesStorage';
 import useRecipeStorage from '@/state/useRecipeStorage';
-import { submitSearch } from '@/api/recipes/api';
+import { submitSearch } from '@/api/spoonacular';
+import { signIn } from '@/api/cookbook';
 import Cookies from 'js-cookie';
 
 export default function Search() {
@@ -21,6 +22,7 @@ export default function Search() {
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
+    console.log(signIn);
   };
 
   const onSubmit = (evt) => {

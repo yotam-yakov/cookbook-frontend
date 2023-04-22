@@ -9,7 +9,7 @@ const logResponse = (res) => {
   return res.data;
 };
 
-const signIn = ({ email, password }) => {
+export const signIn = ({ email, password }) => {
   return api
     .post('/signin', {
       email,
@@ -18,7 +18,7 @@ const signIn = ({ email, password }) => {
     .then(logResponse);
 };
 
-const signUp = ({ email, name, password }) => {
+export const signUp = ({ email, name, password }) => {
   return api
     .post('/signup', {
       email,
@@ -28,7 +28,7 @@ const signUp = ({ email, name, password }) => {
     .then(logResponse);
 };
 
-const addRecipe = (recipe, jwt) => {
+export const addRecipe = (recipe, jwt) => {
   return api
     .post(
       '/recipes',
@@ -42,7 +42,7 @@ const addRecipe = (recipe, jwt) => {
     .then(logResponse);
 };
 
-const updateRecipe = (recipeId, updates, jwt) => {
+export const updateRecipe = (recipeId, updates, jwt) => {
   return api
     .patch(`recipes/${recipeId}`, updates, {
       headers: {
@@ -52,7 +52,7 @@ const updateRecipe = (recipeId, updates, jwt) => {
     .then(logResponse);
 };
 
-const deleteRecipe = (recipeId, jwt) => {
+export const deleteRecipe = (recipeId, jwt) => {
   return api
     .delete(`recipes/${recipeId}`, {
       headers: {
@@ -62,7 +62,7 @@ const deleteRecipe = (recipeId, jwt) => {
     .then(logResponse);
 };
 
-const getSavedRecipes = (jwt) => {
+export const getSavedRecipes = (jwt) => {
   return api
     .get('/recipes/saved', {
       headers: {
@@ -72,7 +72,7 @@ const getSavedRecipes = (jwt) => {
     .then(logResponse);
 };
 
-const getMyRecipes = (jwt) => {
+export const getMyRecipes = (jwt) => {
   return api
     .get('/recipes/my', {
       headers: {
@@ -82,17 +82,6 @@ const getMyRecipes = (jwt) => {
     .then(logResponse);
 };
 
-const sendFeedback = (feedback) => {
+export const sendFeedback = (feedback) => {
   return api.post('/feedback', feedback).then(logResponse);
-};
-
-export {
-  signIn,
-  signUp,
-  addRecipe,
-  updateRecipe,
-  deleteRecipe,
-  getSavedRecipes,
-  getMyRecipes,
-  sendFeedback,
 };

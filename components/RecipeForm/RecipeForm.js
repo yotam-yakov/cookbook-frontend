@@ -4,7 +4,7 @@ import Switch from '../Switch/Switch';
 import InputArray from '../InputArray/InputArray';
 import useValuesStorage from '@/state/useValuesStorage';
 import useMessageStorage from '@/state/useMessageStorage';
-import { addRecipe, updateRecipe } from '@/api/cookbook/api';
+import { addRecipe, updateRecipe } from '@/api/cookbook';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';

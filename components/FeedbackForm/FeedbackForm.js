@@ -2,7 +2,7 @@
 import Form from '@/components/Form/Form';
 import useValuesStorage from '@/state/useValuesStorage';
 import useMessageStorage from '@/state/useMessageStorage';
-import { sendFeedback } from '@/api/cookbook/api';
+import { sendFeedback } from '@/api/cookbook';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
