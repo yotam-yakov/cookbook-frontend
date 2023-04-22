@@ -2,7 +2,14 @@ import Link from 'next/link';
 import Input from '../Input/Input';
 import styles from './Form.module.css';
 
-export default function Form({ title, submit, inputs, redirect, children }) {
+export default function Form({
+  title,
+  submit,
+  inputs,
+  isLoading,
+  redirect,
+  children,
+}) {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{title}</h2>
@@ -11,7 +18,10 @@ export default function Form({ title, submit, inputs, redirect, children }) {
           return <Input input={input} key={index} />;
         })}
         {children}
-        <button type='submit' className={styles.submit}>
+        <button
+          type='submit'
+          className={`${styles.submit} ${isLoading && styles.submitLoading}`}
+        >
           {submit.text}
         </button>
         {redirect && (

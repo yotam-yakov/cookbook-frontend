@@ -6,8 +6,10 @@ import useMessageStorage from '@/state/useMessageStorage';
 import { signIn, getSavedRecipes } from '@/api/cookbook/api';
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function SignInForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const values = useValuesStorage((state) => state.values);
   const logIn = useUserStorage((state) => state.logIn);
   const setMessageProps = useMessageStorage((state) => state.setMessageProps);
@@ -15,6 +17,7 @@ export default function SignInForm() {
 
   const submitSignin = (evt) => {
     evt.preventDefault();
+    setIsLoading(true);
 
     signIn({
       email: values.email,
@@ -39,12 +42,13 @@ export default function SignInForm() {
       })
       .catch((err) => {
         setMessageProps({
-          message: err.response ? err.response.data.message : 'Unknown Error',
+          message: err.response ? err.response.data.message : 'Server Error',
           isError: true,
           onClose: () => {},
         });
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
   const signin = {
     title: 'Sign In',
@@ -71,6 +75,7 @@ export default function SignInForm() {
         },
       },
     ],
+    isLoading,
     redirect: {
       url: '/signup',
       text: 'New user? Click here to sign up!',

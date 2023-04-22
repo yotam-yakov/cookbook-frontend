@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { values, switches, handleChange, handleSwitches } = useValuesStorage(
     (state) => ({
       values: state.values,
@@ -16,10 +17,7 @@ export default function Search() {
       handleSwitches: state.handleSwitches,
     })
   );
-  const { savedRecipes, setSearchResults } = useRecipeStorage((state) => ({
-    savedRecipes: state.savedRecipes,
-    setSearchResults: state.setSearchResults,
-  }));
+  const setSearchResults = useRecipeStorage((state) => state.setSearchResults);
 
   const toggleFilter = () => {
     setIsFilterOpen(!isFilterOpen);
@@ -27,6 +25,8 @@ export default function Search() {
 
   const onSubmit = (evt) => {
     evt.preventDefault();
+    setIsLoading(true);
+
     const search = {
       query: values.search,
       diet: `${switches.vegan ? 'vegan,' : ''}${
@@ -64,11 +64,12 @@ export default function Search() {
           onClose: () => {},
         });
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   return (
-    <div className={styles.search}>
+    <div className={`${styles.search}  ${isLoading && styles.searchLoading}`}>
       <form onSubmit={onSubmit} className={styles.form}>
         <input
           value={values.search || ''}

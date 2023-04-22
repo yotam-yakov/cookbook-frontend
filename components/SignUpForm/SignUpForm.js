@@ -4,13 +4,18 @@ import useValuesStorage from '@/state/useValuesStorage';
 import useMessageStorage from '@/state/useMessageStorage';
 import { signUp } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function SignUpForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const values = useValuesStorage((state) => state.values);
   const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
-  const submitSignup = () => {
+  const submitSignup = (evt) => {
+    evt.preventDefault();
+    setIsLoading(true);
+
     signUp({
       email: values.email,
       name: values.username,
@@ -31,7 +36,8 @@ export default function SignUpForm() {
           onClose: () => {},
         });
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const signup = {
@@ -67,6 +73,7 @@ export default function SignUpForm() {
         },
       },
     ],
+    isLoading,
     redirect: {
       url: '/signin',
       text: 'Already a member? Click here to sign in!',

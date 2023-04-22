@@ -7,13 +7,18 @@
   overflow: hidden;
 }
 
+.searchLoading {
+  animation: loading 800ms linear infinite;
+  border: 1px solid var(--color-second);
+}
+
 .form {
   display: grid;
   grid-template-columns: 1fr 4.75rem 4.75rem;
   justify-content: center;
 }
 
-.query {
+.search .query {
   margin: 0;
   border: none;
   padding: 1rem;
@@ -89,6 +94,18 @@
 
 .input:focus {
   outline: none;
+}
+
+@keyframes loading {
+  0% {
+    border-width: 0rem;
+  }
+  50% {
+    border-width: 0.75rem;
+  }
+  100% {
+    border-width: 0rem;
+  }
 }
 
 @media screen and (max-width: 768px) {

@@ -4,14 +4,18 @@ import useValuesStorage from '@/state/useValuesStorage';
 import useMessageStorage from '@/state/useMessageStorage';
 import { sendFeedback } from '@/api/cookbook/api';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function FeedbackForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const values = useValuesStorage((state) => state.values);
   const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const router = useRouter();
 
   const submitFeedback = (evt) => {
     evt.preventDefault();
+    setIsLoading(true);
+
     sendFeedback({
       email: values.email,
       title: values.title,
@@ -34,7 +38,8 @@ export default function FeedbackForm() {
           onClose: () => {},
         });
         console.error(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
   const feedback = {
     title: 'Tell us your thoughts',
