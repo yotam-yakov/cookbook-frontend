@@ -42,7 +42,9 @@ export default function SignInForm() {
       })
       .catch((err) => {
         setMessageProps({
-          message: err.response ? err.response.data.message : 'Server Error',
+          message: err.response
+            ? err.response.data.message
+            : 'Client Side Error',
           isError: true,
           onClose: () => {},
         });

@@ -32,7 +32,7 @@ export default function FeedbackForm() {
       .catch((err) => {
         setMessageProps({
           message: `The request returned an error, try again later. Message: '${
-            err.response ? err.response.data.message : 'Server Error'
+            err.response ? err.response.data.message : 'Client Side Error'
           }'`,
           isError: true,
           onClose: () => {},

@@ -41,28 +41,29 @@ export default function Search() {
       }`,
       maxReadyTime: values.time ? values.time : undefined,
     };
+    const cookie = Cookies.get('savedRecipes');
 
     submitSearch(search)
       .then((recipes) => {
         if (recipes.length === 0) {
           setSearchResults(['empty']);
-        } else {
+          return;
+        }
+        if (cookie) {
           recipes.forEach((recipe) => {
-            if (
-              JSON.parse(Cookies.get('savedRecipes')).includes(recipe.recipeId)
-            ) {
+            if (JSON.parse(cookie).includes(recipe.recipeId)) {
               recipe.saved = true;
             }
           });
-          console.log(recipes);
-          setSearchResults(recipes);
         }
+        console.log(recipes);
+        setSearchResults(recipes);
         setIsFilterOpen(false);
       })
       .catch((err) => {
         setMessageProps({
           message: `Search could not be completed. Message: '${
-            err.response ? err.response.data.message : 'Server Error'
+            err.response ? err.response.data.message : 'Client Side Error'
           }'`,
           isError: true,
           onClose: () => {},
