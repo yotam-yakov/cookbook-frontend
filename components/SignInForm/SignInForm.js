@@ -24,10 +24,12 @@ export default function SignInForm() {
       password: values.password,
     })
       .then((data) => {
-        Cookies.set('jwt', data.token);
+        Cookies.set('jwt', data.token, { expires: 7 });
         getSavedRecipes(data.token).then((recipes) => {
           const recipesId = recipes.map((recipe) => recipe.recipeId);
-          Cookies.set('savedRecipes', JSON.stringify(recipesId));
+          Cookies.set('savedRecipes', JSON.stringify(recipesId), {
+            expires: 7,
+          });
         });
       })
       .then(() => {
