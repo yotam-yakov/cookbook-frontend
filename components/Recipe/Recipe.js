@@ -119,7 +119,7 @@ export default function Recipe() {
           </button>
         </div>
         <div className={styles.ingredients}>
-          {recipe.ingredients ? (
+          {recipe.ingredients.length > 0 ? (
             recipe.ingredients.map((ingredient, index) => {
               return (
                 <div className={styles.ingredient} key={index}>
@@ -139,7 +139,7 @@ export default function Recipe() {
             <p>No ingredients provided</p>
           )}
         </div>
-        {recipe.instructions ? (
+        {recipe.instructions.length > 0 ? (
           <div className={styles.instructions}>
             {recipe.instructions &&
               recipe.instructions.map((instruction, index) => {
