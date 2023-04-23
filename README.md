@@ -4,7 +4,7 @@ This is COOKBOOK, a project for searching, saving and writing recipes.
 
 ## Features
 
-- Search recipes online with various filters, the search engine is based on (Spoonacular)[https://spoonacular.com/food-api], an api for recipes with countless methods and options.
+- Search recipes online with various filters, the search engine is based on [Spoonacular](https://spoonacular.com/food-api), an api for recipes with countless methods and options.
 - Save recipes you like to easily find them later.
 - Add your own recipes and save them to yourself and edit them.
 - Easily modify ingredients amounts according to requested amount af servings.
@@ -39,6 +39,6 @@ The project is deployed on [Vercel Platform](https://vercel.com/new?utm_medium=d
 
 ### Links
 
-- (Deployed app on Vercel Platform)[https://cookbook-project.vercel.app/]
-- (API GitHub Repo)[https://github.com/yotam-yakov/cookbook-api]
-- (API domain)[https://cookbook-project-api.vercel.app/]
+- [Deployed app on Vercel Platform](https://cookbook-project.vercel.app/)
+- [API GitHub Repo](https://github.com/yotam-yakov/cookbook-api)
+- [API domain](https://cookbook-project-api.vercel.app/)
