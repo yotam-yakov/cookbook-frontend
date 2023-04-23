@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styles from './Search.module.css';
 import useValuesStorage from '@/state/useValuesStorage';
 import useRecipeStorage from '@/state/useRecipeStorage';
+import useMessageStorage from '@/state/useMessageStorage';
 import { submitSearch } from '@/api/spoonacular';
 import { signIn } from '@/api/cookbook';
 import Cookies from 'js-cookie';
@@ -10,6 +11,7 @@ import Cookies from 'js-cookie';
 export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const setMessageProps = useMessageStorage((state) => state.setMessageProps);
   const { values, switches, handleChange, handleSwitches } = useValuesStorage(
     (state) => ({
       values: state.values,
