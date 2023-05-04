@@ -30,6 +30,7 @@ export default function Search() {
   const onSubmit = (evt) => {
     evt.preventDefault();
     setIsLoading(true);
+    setSearchResults([]);
 
     const search = {
       query: values.search,
